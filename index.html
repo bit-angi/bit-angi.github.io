@@ -150,6 +150,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-算法笔记1——离散化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">算法笔记1——离散化</a>
+    </h1>
+  
+
+        
+        <a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2025-04-27T10:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="算法笔记离散化">算法笔记——离散化</h3>
+<p>我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。</p>
+<h5 id="acwing-802-区间和">AcWing 802 区间和</h5>
+<figure>
+<img src="\images\acwing802.png" alt="image-20250427184346137" />
+<figcaption aria-hidden="true">image-20250427184346137</figcaption>
+</figure>
+<p>数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注没有操作过的那些点，我们只关注数字的相对大小。</p>
+<p>例如原数组为[100,200,300,400,500]。我们在查询{300,500}时，仅关注[300,400,500]三个数，而不是里面的两百个数。</p>
+<p>所以核心的把原数组中的数映射成新数组的操作为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lower_bound</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>(),x) - all.<span class="built_in">begin</span>() ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就这么简单。不过我们在此之间需要对all数组（即所有可能用到的数字）进行排序和去重。代码为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// unique函数：将数组去重，但是只是把重复元素放到序列最后了，返回的是去重后数组不重复序列的end</span></span><br><span class="line"><span class="built_in">sort</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>());</span><br><span class="line">all.<span class="built_in">erase</span>(<span class="built_in">unique</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>()),all.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Transformer面试指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -615,6 +701,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法笔记</a>
               </li>
             
             <div class="clearfix"></div>

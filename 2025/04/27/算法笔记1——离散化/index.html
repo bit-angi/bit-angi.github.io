@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: Hexo | Sean.的个人博客~</title>
+  <title>算法笔记1——离散化 | Sean.的个人博客~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎联系xiwangai@bit.edu.cn">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sean.的个人博客~">
-<meta property="og:url" content="http://example.com/tags/Hexo/index.html">
+  <meta name="description" content="算法笔记——离散化 我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。 AcWing 802 区间和   image-20250427184346137  数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记1——离散化">
+<meta property="og:url" content="http://example.com/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/index.html">
 <meta property="og:site_name" content="Sean.的个人博客~">
-<meta property="og:description" content="欢迎联系xiwangai@bit.edu.cn">
+<meta property="og:description" content="算法笔记——离散化 我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。 AcWing 802 区间和   image-20250427184346137  数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/acwing802.png">
+<meta property="article:published_time" content="2025-04-27T10:52:17.000Z">
+<meta property="article:modified_time" content="2025-04-27T10:53:17.641Z">
 <meta property="article:author" content="Sean.">
+<meta property="article:tag" content="算法笔记">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/acwing802.png">
   
     <link rel="alternative" href="/atom.xml" title="Sean.的个人博客~" type="application/atom+xml">
   
@@ -148,79 +153,179 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-算法笔记1——离散化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2025-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">使用 Hexo 搭建个人博客教程</a>
+    <h1 class="article-title" itemprop="name">
+      算法笔记1——离散化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2025-04-27T10:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="算法笔记离散化">算法笔记——离散化</h3>
+<p>我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。</p>
+<h5 id="acwing-802-区间和">AcWing 802 区间和</h5>
+<figure>
+<img src="\images\acwing802.png" alt="image-20250427184346137" />
+<figcaption aria-hidden="true">image-20250427184346137</figcaption>
+</figure>
+<p>数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注没有操作过的那些点，我们只关注数字的相对大小。</p>
+<p>例如原数组为[100,200,300,400,500]。我们在查询{300,500}时，仅关注[300,400,500]三个数，而不是里面的两百个数。</p>
+<p>所以核心的把原数组中的数映射成新数组的操作为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lower_bound</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>(),x) - all.<span class="built_in">begin</span>() ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就这么简单。不过我们在此之间需要对all数组（即所有可能用到的数字）进行排序和去重。代码为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// unique函数：将数组去重，但是只是把重复元素放到序列最后了，返回的是去重后数组不重复序列的end</span></span><br><span class="line"><span class="built_in">sort</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>());</span><br><span class="line">all.<span class="built_in">erase</span>(<span class="built_in">unique</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>()),all.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术分享//" class="article-tag-list-link color5">技术分享</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Transformer面试指南</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -243,9 +348,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
