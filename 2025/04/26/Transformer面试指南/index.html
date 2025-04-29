@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://example.com/images/transformer.png">
 <meta property="og:image" content="http://example.com/images/ViT.png">
 <meta property="article:published_time" content="2025-04-26T13:10:19.000Z">
-<meta property="article:modified_time" content="2025-04-26T16:19:07.957Z">
+<meta property="article:modified_time" content="2025-04-29T04:37:39.152Z">
 <meta property="article:author" content="Sean.">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,10 @@ softmax(Q<em>KT/sqrt(d_K))</em>V。还有这里的注意力机制一般是多头
 <img src="/images/ViT.png" alt="error" />
 <figcaption aria-hidden="true">error</figcaption>
 </figure>
-<h5 id="讲解一下残差连接以及意义">6.讲解一下残差连接以及意义</h5>
+<h5 id="vit中cls_token的作用">6.ViT中Cls_token的作用？</h5>
+<p>假设我们将原始图像切分为9个小块，但是最终输入的序列长度是10.这是因为我们人为添加了一个CLS_token。</p>
+<p>如果没有这个向量的话，我们就是把9个向量放到Transformer编码器中编码，这样会得到9个编码后的向量，这样就面临选择哪个向量作为输出，进行后面的分类的问题。很明显选择任何一个都不太好。所以我们人为添加了一个可学习的嵌入向量ClassToken，最后用这个ClassToken的编码作为输出进行分类即可。</p>
+<h5 id="讲解一下残差连接以及意义">7.讲解一下残差连接以及意义</h5>
 <p>假设我们的输入是x，要预测H(x)，我们可以令H(x)=F(x)+x，转为预测F(x)，即最终预测的残差。对于深层的网络，用了残差连接，求导后就有一个常数1，这样就算原来的导数很小，最终的导数也不至于会很接近0，使得导数能够有效传播。</p>
 
       
