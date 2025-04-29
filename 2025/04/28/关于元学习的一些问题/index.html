@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>算法笔记1——离散化 | Sean.的个人博客~</title>
+  <title>关于元学习的一些问题 | Sean.的个人博客~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="算法笔记——离散化 我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。 AcWing 802 区间和   image-20250427184346137  数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注">
+  <meta name="description" content="什么是元学习？ 元学习是一种让模型学会如何学习的机器学习方法，元学习的目的是找到一个可以快速适应各种任务的初始参数模型，使得模型能够在少量数据的基础上快速适应新的任务。  元学习的训练单位是任务而不是数据。 元学习分为两个阶段：元训练阶段和自适应阶段。元训练阶段是在多个任务上训练模型。自适应阶段是在一个新的任务上用少量的数据更新模型参数。普通模型只在一个任务上进行训练，而元学习在多个特定任">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法笔记1——离散化">
-<meta property="og:url" content="http://example.com/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/index.html">
+<meta property="og:title" content="关于元学习的一些问题">
+<meta property="og:url" content="http://example.com/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Sean.的个人博客~">
-<meta property="og:description" content="算法笔记——离散化 我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。 AcWing 802 区间和   image-20250427184346137  数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注">
+<meta property="og:description" content="什么是元学习？ 元学习是一种让模型学会如何学习的机器学习方法，元学习的目的是找到一个可以快速适应各种任务的初始参数模型，使得模型能够在少量数据的基础上快速适应新的任务。  元学习的训练单位是任务而不是数据。 元学习分为两个阶段：元训练阶段和自适应阶段。元训练阶段是在多个任务上训练模型。自适应阶段是在一个新的任务上用少量的数据更新模型参数。普通模型只在一个任务上进行训练，而元学习在多个特定任">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/acwing802.png">
-<meta property="article:published_time" content="2025-04-27T10:52:17.000Z">
-<meta property="article:modified_time" content="2025-04-27T10:53:17.641Z">
+<meta property="article:published_time" content="2025-04-28T14:13:40.000Z">
+<meta property="article:modified_time" content="2025-04-29T04:31:43.535Z">
 <meta property="article:author" content="Sean.">
-<meta property="article:tag" content="算法笔记">
+<meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/acwing802.png">
   
     <link rel="alternative" href="/atom.xml" title="Sean.的个人博客~" type="application/atom+xml">
   
@@ -153,39 +151,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-算法笔记1——离散化" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-关于元学习的一些问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      算法笔记1——离散化
+      关于元学习的一些问题
     </h1>
   
 
         
-        <a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2025-04-27T10:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-27</time>
+        <a href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2025-04-28T14:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="算法笔记离散化">算法笔记——离散化</h3>
-<p>我们在面对一些数据的绝对大小不重要，仅关注数据的相对大小的问题时，常常使用离散化。具体而言，我们把所有将要用到的数据存储起来，排序去重。然后以每个数值在排序后数组中的位置来代替这个数值。</p>
-<h5 id="acwing-802-区间和">AcWing 802 区间和</h5>
-<figure>
-<img src="\images\acwing802.png" alt="image-20250427184346137" />
-<figcaption aria-hidden="true">image-20250427184346137</figcaption>
-</figure>
-<p>数据范围中，数字个数在10的五次方量级，但数的空间在10的九次方量级。并且在求和时，我们不关注没有操作过的那些点，我们只关注数字的相对大小。</p>
-<p>例如原数组为[100,200,300,400,500]。我们在查询{300,500}时，仅关注[300,400,500]三个数，而不是里面的两百个数。</p>
-<p>所以核心的把原数组中的数映射成新数组的操作为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lower_bound</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>(),x) - all.<span class="built_in">begin</span>() ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>就这么简单。不过我们在此之间需要对all数组（即所有可能用到的数字）进行排序和去重。代码为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// unique函数：将数组去重，但是只是把重复元素放到序列最后了，返回的是去重后数组不重复序列的end</span></span><br><span class="line"><span class="built_in">sort</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>());</span><br><span class="line">all.<span class="built_in">erase</span>(<span class="built_in">unique</span>(all.<span class="built_in">begin</span>(),all.<span class="built_in">end</span>()),all.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+        <h4 id="什么是元学习">什么是元学习？</h4>
+<p>元学习是一种让模型学会如何学习的机器学习方法，元学习的目的是找到一个可以快速适应各种任务的初始参数模型，使得模型能够在少量数据的基础上快速适应新的任务。</p>
+<ol type="1">
+<li>元学习的训练单位是任务而不是数据。</li>
+<li>元学习分为两个阶段：元训练阶段和自适应阶段。元训练阶段是在多个任务上训练模型。自适应阶段是在一个新的任务上用少量的数据更新模型参数。普通模型只在一个任务上进行训练，而元学习在多个特定任务上进行训练。</li>
+</ol>
+<p>例如，我们在进行N-Ways
+K-shot任务(N个类别，每个类别K张图)时，我们可以根据已知的数据集构建很多个N-Way
+K-Shot的任务，每个任务都有自己的训练数据和测试数据，分别叫支持集和查询集。</p>
 
       
 
@@ -220,7 +214,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
         		</li>
       		
 		</ul>
@@ -276,7 +270,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -290,18 +284,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          关于元学习的一些问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Transformer面试指南</div>
+    <a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">算法笔记1——离散化</div>
       <i class="icon-circle-right"></i>
     </a>
   
