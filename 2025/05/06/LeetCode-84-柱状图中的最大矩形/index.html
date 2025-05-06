@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>随笔 | Sean.的个人博客~</title>
+  <title>LeetCode 84.柱状图中的最大矩形 | Sean.的个人博客~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="随笔">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="题目 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。 求在该柱状图中，能够勾勒出来的矩形的最大面积。 示例 1:   img  123输入：heights &#x3D; [2,1,5,6,2,3]输出：10解释：最大的矩形为图中红色区域，面积为 10 示例 2：   img  12输入： heights &#x3D; [2,4]输出： 4 提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 84.柱状图中的最大矩形">
+<meta property="og:url" content="http://example.com/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/index.html">
 <meta property="og:site_name" content="Sean.的个人博客~">
+<meta property="og:description" content="题目 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。 求在该柱状图中，能够勾勒出来的矩形的最大面积。 示例 1:   img  123输入：heights &#x3D; [2,1,5,6,2,3]输出：10解释：最大的矩形为图中红色区域，面积为 10 示例 2：   img  12输入： heights &#x3D; [2,4]输出： 4 提">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-04-26T13:55:25.000Z">
-<meta property="article:modified_time" content="2025-04-26T13:57:51.708Z">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg">
+<meta property="article:published_time" content="2025-05-06T07:55:54.000Z">
+<meta property="article:modified_time" content="2025-05-06T08:05:12.855Z">
 <meta property="article:author" content="Sean.">
+<meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Sean.的个人博客~" type="application/atom+xml">
   
@@ -148,27 +153,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-LeetCode-84-柱状图中的最大矩形" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      随笔
+      LeetCode 84.柱状图中的最大矩形
     </h1>
   
 
         
-        <a href="/tags/index.html" class="archive-article-date">
-  	<time datetime="2025-04-26T13:55:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
+        <a href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="archive-article-date">
+  	<time datetime="2025-05-06T07:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="题目">题目</h4>
+<p>给定 <em>n</em>
+个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1
+。</p>
+<p>求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p><strong>示例 1:</strong></p>
+<figure>
+<img src="https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：heights = [2,1,5,6,2,3]</span><br><span class="line">输出：10</span><br><span class="line">解释：最大的矩形为图中红色区域，面积为 10</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure>
+<img
+src="https://assets.leetcode.com/uploads/2021/01/04/histogram-1.jpg"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入： heights = [2,4]</span><br><span class="line">输出： 4</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= heights.length &lt;=105</code></li>
+<li><code>0 &lt;= heights[i] &lt;= 104</code></li>
+</ul>
+<h4 id="思路">思路</h4>
+<p>我们可以从左往右依次看柱子。</p>
+<ul>
+<li>如果遇到一个柱子，它的高度比其左边的柱子高，则左边的柱子其实还无法确定由它的高度构成的最大矩形。</li>
+<li>如果遇到一个柱子，它的高度比其左边的柱子低，说明其左边的，比他低的那个柱子的高度构成的矩形已经可以确定（因为说明了其无法向右扩展了）。</li>
+</ul>
+<p>比如第一个示例，当我们读到第二个2这个柱子时，可以确定5、6这两个柱子构成的矩形分别是10、6。</p>
+<p>所以我们需要构造一个单调栈，栈中保存元素的位置，满足高度单调增。一旦需要弹出元素，就可以计算弹出的位置的柱子构成的矩形。具体计算方式为，高度确定，宽度为现在读取到的位置减去弹出元素在栈中的下方第一个元素的位置。</p>
+<h4 id="代码">代码</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">largestRectangleArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        stack&lt;<span class="type">int</span>&gt; stk ;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt; heights.<span class="built_in">size</span>();i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (stk.<span class="built_in">empty</span>() || heights[i] &gt;= heights[stk.<span class="built_in">top</span>()]) &#123;</span><br><span class="line">                stk.<span class="built_in">push</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (heights[i] &lt; heights[stk.<span class="built_in">top</span>()]) &#123;</span><br><span class="line">                <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>() &amp;&amp; heights[i] &lt; heights[stk.<span class="built_in">top</span>()]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (stk.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="type">int</span> pos = stk.<span class="built_in">top</span>() ;</span><br><span class="line">                        stk.<span class="built_in">pop</span>() ;</span><br><span class="line">                        res = <span class="built_in">max</span>(res,(i-stk.<span class="built_in">top</span>()<span class="number">-1</span>)*heights[pos]);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="type">int</span> pos = stk.<span class="built_in">top</span>() ;</span><br><span class="line">                        res = <span class="built_in">max</span>(res,(i)*heights[pos]);</span><br><span class="line">                        stk.<span class="built_in">pop</span>();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stk.<span class="built_in">push</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> i = heights.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (stk.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="type">int</span> pos = stk.<span class="built_in">top</span>() ;</span><br><span class="line">                stk.<span class="built_in">pop</span>() ;</span><br><span class="line">                res = <span class="built_in">max</span>(res,(i-stk.<span class="built_in">top</span>()<span class="number">-1</span>)*heights[pos]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="type">int</span> pos = stk.<span class="built_in">top</span>() ;</span><br><span class="line">                res = <span class="built_in">max</span>(res,(i)*heights[pos]);</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -198,6 +237,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -248,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/tags/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -260,6 +310,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode72_编辑距离</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -310,7 +370,7 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
