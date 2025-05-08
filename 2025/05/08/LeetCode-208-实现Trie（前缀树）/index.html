@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2025 | Sean.的个人博客~</title>
+  <title>LeetCode 208. 实现Trie（前缀树） | Sean.的个人博客~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎联系xiwangai@bit.edu.cn">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sean.的个人博客~">
-<meta property="og:url" content="http://example.com/archives/2025/index.html">
+  <meta name="description" content="题目 Trie（发音类似 “try”）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补全和拼写检查。 请你实现 Trie 类：  Trie() 初始化前缀树对象。 void insert(String word) 向前缀树中插入字符串 word 。 boolean search(String word) 如果字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 208. 实现Trie（前缀树）">
+<meta property="og:url" content="http://example.com/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/index.html">
 <meta property="og:site_name" content="Sean.的个人博客~">
-<meta property="og:description" content="欢迎联系xiwangai@bit.edu.cn">
+<meta property="og:description" content="题目 Trie（发音类似 “try”）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补全和拼写检查。 请你实现 Trie 类：  Trie() 初始化前缀树对象。 void insert(String word) 向前缀树中插入字符串 word 。 boolean search(String word) 如果字">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-08T15:26:46.000Z">
+<meta property="article:modified_time" content="2025-05-08T15:29:32.870Z">
 <meta property="article:author" content="Sean.">
+<meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Sean.的个人博客~" type="application/atom+xml">
@@ -148,36 +151,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-LeetCode-208-实现Trie（前缀树）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      LeetCode 208. 实现Trie（前缀树）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/" class="archive-article-date">
+
+        
+        <a href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/" class="archive-article-date">
   	<time datetime="2025-05-08T15:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-08</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/">LeetCode 208. 实现Trie（前缀树）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="题目">题目</h4>
+<p><strong><a
+target="_blank" rel="noopener" href="https://baike.baidu.com/item/字典树/9825209?fr=aladdin">Trie</a></strong>（发音类似
+“try”）或者说 <strong>前缀树</strong>
+是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补全和拼写检查。</p>
+<p>请你实现 Trie 类：</p>
+<ul>
+<li><code>Trie()</code> 初始化前缀树对象。</li>
+<li><code>void insert(String word)</code> 向前缀树中插入字符串
+<code>word</code> 。</li>
+<li><code>boolean search(String word)</code> 如果字符串
+<code>word</code> 在前缀树中，返回
+<code>true</code>（即，在检索之前已经插入）；否则，返回
+<code>false</code> 。</li>
+<li><code>boolean startsWith(String prefix)</code>
+如果之前已经插入的字符串 <code>word</code> 的前缀之一为
+<code>prefix</code> ，返回 <code>true</code> ；否则，返回
+<code>false</code> 。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">[&quot;Trie&quot;, &quot;insert&quot;, &quot;search&quot;, &quot;search&quot;, &quot;startsWith&quot;, &quot;insert&quot;, &quot;search&quot;]</span><br><span class="line">[[], [&quot;apple&quot;], [&quot;apple&quot;], [&quot;app&quot;], [&quot;app&quot;], [&quot;app&quot;], [&quot;app&quot;]]</span><br><span class="line">输出</span><br><span class="line">[null, null, true, false, true, null, true]</span><br><span class="line"></span><br><span class="line">解释</span><br><span class="line">Trie trie = new Trie();</span><br><span class="line">trie.insert(&quot;apple&quot;);</span><br><span class="line">trie.search(&quot;apple&quot;);   // 返回 True</span><br><span class="line">trie.search(&quot;app&quot;);     // 返回 False</span><br><span class="line">trie.startsWith(&quot;app&quot;); // 返回 True</span><br><span class="line">trie.insert(&quot;app&quot;);</span><br><span class="line">trie.search(&quot;app&quot;);     // 返回 True</span><br></pre></td></tr></table></figure>
+<h4 id="思路">思路</h4>
+<p>实际上我们需要一个children数组，保存所有可能指向的字母代表的孩子节点，然后用一个标志表示此节点是否为某个End即可。参考该图：</p>
+<figure>
+<img
+src="https://pic.leetcode-cn.com/e3c98484881bd654daa8419bcb0791a2b6f8288b58ef50df70ddaeefc4084f48-file_1575215107950"
+alt="来自算法4" />
+<figcaption aria-hidden="true">来自算法4</figcaption>
+</figure>
+<h4 id="代码">代码</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Trie</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Trie* children[<span class="number">26</span>];</span><br><span class="line">    <span class="type">bool</span> isEnd ;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Trie</span>() &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">26</span>;i++) &#123;</span><br><span class="line">            children[i] = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;isEnd = <span class="literal">false</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(string word)</span> </span>&#123;</span><br><span class="line">        Trie* p = <span class="keyword">this</span> ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : word) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>]) &#123;</span><br><span class="line">                p = p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>] = <span class="keyword">new</span> <span class="built_in">Trie</span>();</span><br><span class="line">                p = p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        p-&gt;isEnd = <span class="literal">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">search</span><span class="params">(string word)</span> </span>&#123;</span><br><span class="line">        Trie* p = <span class="keyword">this</span> ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : word) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>]) &#123;</span><br><span class="line">                p = p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p-&gt;isEnd;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">startsWith</span><span class="params">(string prefix)</span> </span>&#123;</span><br><span class="line">        Trie* p = <span class="keyword">this</span> ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : prefix) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>]) &#123;</span><br><span class="line">                p = p-&gt;children[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,266 +242,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="archive-article-date">
-  	<time datetime="2025-05-06T07:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 84.柱状图中的最大矩形</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">LeetCode 84.柱状图中的最大矩形</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/" class="archive-article-date">
-  	<time datetime="2025-05-05T16:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">LeetCode72_编辑距离</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2025-04-28T14:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">关于元学习的一些问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2025-04-27T10:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">算法笔记1——离散化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/" class="archive-article-date">
-  	<time datetime="2025-04-26T13:10:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/">Transformer面试指南</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2025-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">使用 Hexo 搭建个人博客教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术分享//" class="article-tag-list-link color5">技术分享</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -471,8 +364,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
