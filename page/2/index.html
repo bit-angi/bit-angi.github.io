@@ -150,6 +150,190 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-LeetCode72-编辑距离" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">LeetCode72_编辑距离</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/" class="archive-article-date">
+  	<time datetime="2025-05-05T16:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="题目">题目</h4>
+<p>https://leetcode.cn/problems/edit-distance</p>
+<p>给你两个单词 <code>word1</code> 和 <code>word2</code>， <em>请返回将
+<code>word1</code> 转换成 <code>word2</code> 所使用的最少操作数</em>
+。</p>
+<p>你可以对一个单词进行如下三种操作：</p>
+<ul>
+<li>插入一个字符</li>
+<li>删除一个字符</li>
+<li>替换一个字符</li>
+</ul>
+<h4 id="思路">思路</h4>
+<p>我们知道，如果要让一个字符串s，通过一步操作就可以变成另一个字符串t，则有三种情况：</p>
+<ul>
+<li>去掉s的最后一个字母后即可变成t，则需要删除最后一个字符。前提条件是s[0…i-1]
+== t</li>
+<li>在s基础上添加一个字母即可变成t，则需要增加一个字符。前提是s[0…i] ==
+t[0…i-1]</li>
+<li>将s的最后一个字符改成t的最后一个字符。前提是s[0…i-1] ==
+t[0…i-1];</li>
+</ul>
+<p>那么我们就可以把问题转化为更小的子问题。要让s变成t，只需要知道从以上三种操作中的哪一种转化过来的次数最少，那么我们就要先求使得s[0…i-1]
+== t 的次数、s[0…i] == t[0…i-1]的次数、s[0…i-1] ==
+t[0…i-1]的次数。需要注意的是，如果s[i] == t[j]的情况下，只需要让s[0…i-1]
+== t[0…j-1]即可转移过来。</p>
+<h4 id="代码">代码</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> dp[<span class="number">501</span>][<span class="number">501</span>];</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minDistance</span><span class="params">(string word1, string word2)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l1 = word<span class="number">1.</span><span class="built_in">size</span>() , l2 = word<span class="number">2.</span><span class="built_in">size</span>() ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt;= l1;i++) dp[i][<span class="number">0</span>] = i ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt;= l2;i++) dp[<span class="number">0</span>][i] = i ;      </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span> ; i &lt;= l1;i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span> ; j &lt;= l2;j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (word1[i<span class="number">-1</span>] == word2[j<span class="number">-1</span>]) &#123;</span><br><span class="line">                    dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = <span class="number">1</span> + <span class="built_in">min</span>(<span class="built_in">min</span>(dp[i<span class="number">-1</span>][j],dp[i][j<span class="number">-1</span>]),dp[i<span class="number">-1</span>][j<span class="number">-1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[l1][l2];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于元学习的一些问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">关于元学习的一些问题</a>
+    </h1>
+  
+
+        
+        <a href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2025-04-28T14:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是元学习">什么是元学习？</h4>
+<p>元学习是一种让模型学会如何学习的机器学习方法，元学习的目的是找到一个可以快速适应各种任务的初始参数模型，使得模型能够在少量数据的基础上快速适应新的任务。</p>
+<ol type="1">
+<li>元学习的训练单位是任务而不是数据。</li>
+<li>元学习分为两个阶段：元训练阶段和自适应阶段。元训练阶段是在多个任务上训练模型。自适应阶段是在一个新的任务上用少量的数据更新模型参数。普通模型只在一个任务上进行训练，而元学习在多个特定任务上进行训练。</li>
+<li><strong>对比传统模型：从单一任务到跨任务泛化</strong>
+传统模型通常只在一个大规模数据集上进行训练，并假设测试数据与训练数据分布一致。而元学习则假设未来任务未知，因此在训练阶段引入多个任务进行学习，使得模型在遇到任务分布变化时仍具备良好的迁移能力。这种跨任务的训练方式，为模型赋予了“举一反三”的学习能力。</li>
+</ol>
+<p>例如，我们在进行N-Ways
+K-shot任务(N个类别，每个类别K张图)时，我们可以根据已知的数据集构建很多个N-Way
+K-Shot的任务，每个任务都有自己的训练数据和测试数据，分别叫支持集和查询集。通过不断在这些任务上训练，模型逐步掌握如何从有限的支持集中获取足够的信息，以在查询集中做出准确预测。这种训练方式不仅提升了模型的少样本学习能力，也增强了其在任务迁移时的稳定性和效率。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-算法笔记1——离散化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -732,6 +916,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">计算机专业课</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">CCF-CSP</a>
               </li>
             
             <div class="clearfix"></div>
