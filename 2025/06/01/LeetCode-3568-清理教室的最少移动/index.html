@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2025 | Sean.的个人博客~</title>
+  <title>LeetCode 3568.清理教室的最少移动 | Sean.的个人博客~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎联系xiwangai@bit.edu.cn">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sean.的个人博客~">
-<meta property="og:url" content="http://example.com/archives/2025/page/2/index.html">
+  <meta name="description" content="题目 给你一个 m x n 的网格图 classroom，其中一个学生志愿者负责清理散布在教室里的垃圾。网格图中的每个单元格是以下字符之一：  &#39;S&#39; ：学生的起始位置 &#39;L&#39; ：必须收集的垃圾（收集后，该单元格变为空白） &#39;R&#39; ：重置区域，可以将学生的能量恢复到最大值，无论学生当前的能量是多少（可以多次使用） &#39;X&#39; ：学生无法通过的障碍物 &#39;.&#39; ：空白空间  同时给你">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 3568.清理教室的最少移动">
+<meta property="og:url" content="http://example.com/2025/06/01/LeetCode-3568-%E6%B8%85%E7%90%86%E6%95%99%E5%AE%A4%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8/index.html">
 <meta property="og:site_name" content="Sean.的个人博客~">
-<meta property="og:description" content="欢迎联系xiwangai@bit.edu.cn">
+<meta property="og:description" content="题目 给你一个 m x n 的网格图 classroom，其中一个学生志愿者负责清理散布在教室里的垃圾。网格图中的每个单元格是以下字符之一：  &#39;S&#39; ：学生的起始位置 &#39;L&#39; ：必须收集的垃圾（收集后，该单元格变为空白） &#39;R&#39; ：重置区域，可以将学生的能量恢复到最大值，无论学生当前的能量是多少（可以多次使用） &#39;X&#39; ：学生无法通过的障碍物 &#39;.&#39; ：空白空间  同时给你">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-01T07:09:25.000Z">
+<meta property="article:modified_time" content="2025-06-01T07:17:16.615Z">
 <meta property="article:author" content="Sean.">
+<meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Sean.的个人博客~" type="application/atom+xml">
@@ -148,36 +151,113 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-3568-清理教室的最少移动" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode 3568.清理教室的最少移动
+    </h1>
+  
+
+        
+        <a href="/2025/06/01/LeetCode-3568-%E6%B8%85%E7%90%86%E6%95%99%E5%AE%A4%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8/" class="archive-article-date">
+  	<time datetime="2025-06-01T07:09:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-01</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="题目">题目</h2>
+<p>给你一个 <code>m x n</code> 的网格图
+<code>classroom</code>，其中一个学生志愿者负责清理散布在教室里的垃圾。网格图中的每个单元格是以下字符之一：</p>
+<ul>
+<li><code>'S'</code> ：学生的起始位置</li>
+<li><code>'L'</code> ：必须收集的垃圾（收集后，该单元格变为空白）</li>
+<li><code>'R'</code>
+：重置区域，可以将学生的能量恢复到最大值，无论学生当前的能量是多少（可以多次使用）</li>
+<li><code>'X'</code> ：学生无法通过的障碍物</li>
+<li><code>'.'</code> ：空白空间</li>
+</ul>
+<p>同时给你一个整数
+<code>energy</code>，表示学生的最大能量容量。学生从起始位置
+<code>'S'</code> 开始，带着 <code>energy</code> 的能量出发。</p>
+<p>每次移动到相邻的单元格（上、下、左或右）会消耗 1 单位能量。如果能量为
+0，学生此时只有处在 <code>'R'</code>
+格子时可以继续移动，此区域会将能量恢复到 <strong>最大</strong> 能量值
+<code>energy</code>。</p>
+<p>返回收集所有垃圾所需的 <strong>最少</strong>
+移动次数，如果无法完成，返回 <code>-1</code>。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong>输入:</strong> classroom = [“S.”, “XL”], energy = 2</p>
+<p><strong>输出:</strong> 2</p>
+<p><strong>解释:</strong></p>
+<ul>
+<li>学生从单元格 <code>(0, 0)</code> 开始，带着 2 单位的能量。</li>
+<li>由于单元格 <code>(1, 0)</code> 有一个障碍物
+‘X’，学生无法直接向下移动。</li>
+<li>收集所有垃圾的有效移动序列如下：
+<ul>
+<li>移动 1：从 <code>(0, 0)</code> → <code>(0, 1)</code>，消耗 1
+单位能量，剩余 1 单位。</li>
+<li>移动 2：从 <code>(0, 1)</code> → <code>(1, 1)</code>，收集垃圾
+<code>'L'</code>。</li>
+</ul></li>
+<li>学生通过 2 次移动收集了所有垃圾。因此，输出为 2。</li>
+</ul>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= m == classroom.length &lt;= 20</code></li>
+<li><code>1 &lt;= n == classroom[i].length &lt;= 20</code></li>
+<li><code>classroom[i][j]</code> 是
+<code>'S'</code>、<code>'L'</code>、<code>'R'</code>、<code>'X'</code>
+或 <code>'.'</code> 之一</li>
+<li><code>1 &lt;= energy &lt;= 50</code></li>
+<li>网格图中恰好有 <strong>一个</strong> <code>'S'</code>。</li>
+<li>网格图中 <strong>最多</strong> 有 10 个 <code>'L'</code>
+单元格。</li>
+</ul>
+<h2 id="思路">思路</h2>
+<p>本质上是一个最短路问题，可以用BFS，但是要注意状态的设计和剪枝。</p>
+<p>BFS状态设计：用一个tuple保存(x , y , energy , status ,
+step)，其中status是状态的掩码，用来表示每个垃圾是否已经被收集。</p>
+<p>一旦遍历到某个节点中，status 为全1，就可以直接返回status
+，这是由BFS的性质决定的，先遍历到的节点一定是步数最少的。</p>
+<p>如果不加visit数组，BFS会重复遍历每个节点，时间复杂度很大，而且无法返回-1。所以加一个visit数组，保存处于x,y，状态为status时的最大energy，如果某次遍历到x,y而且状态跟status一样，但是energy却更小或相等，则不用遍历，因为这样一定不如energy大时走的远。</p>
+<h2 id="代码">代码</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">0</span>&#125;, dy[<span class="number">4</span>] = &#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">-1</span>&#125;,totalL,startX,startY;</span><br><span class="line">    <span class="type">int</span> xyToId[<span class="number">51</span>][<span class="number">51</span>];</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minMoves</span><span class="params">(vector&lt;string&gt;&amp; classroom, <span class="type">int</span> maxEnergy)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = classroom.<span class="built_in">size</span>() , n = classroom[<span class="number">0</span>].<span class="built_in">size</span>() ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt; m ;i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span> ; j &lt; n;j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (classroom[i][j] == <span class="string">&#x27;L&#x27;</span>) &#123;</span><br><span class="line">                    xyToId[i][j] = totalL++ ;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (classroom[i][j] == <span class="string">&#x27;S&#x27;</span>) &#123;</span><br><span class="line">                    startX = i ;</span><br><span class="line">                    startY = j ;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> fullStatus = (<span class="number">1</span> &lt;&lt; totalL) - <span class="number">1</span> ;</span><br><span class="line">        queue&lt;tuple&lt;<span class="type">int</span>,<span class="type">int</span>,<span class="type">int</span>,<span class="type">int</span>,<span class="type">int</span>&gt;&gt; q ; <span class="comment">// x , y , status , energy , step</span></span><br><span class="line">        vector&lt;vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&gt; <span class="built_in">vis</span>(m,vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;(n,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">1</span>&lt;&lt;totalL,<span class="number">-1</span>)));</span><br><span class="line">        q.<span class="built_in">emplace</span>(startX,startY,<span class="number">0</span>,maxEnergy,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">auto</span> [x,y,status,energy,step] = q.<span class="built_in">front</span>() ;</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (status == fullStatus) <span class="keyword">return</span> step;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span>;i++) &#123;</span><br><span class="line">                <span class="type">int</span> nx = x + dx[i];</span><br><span class="line">                <span class="type">int</span> ny = y + dy[i];</span><br><span class="line">                <span class="keyword">if</span> (nx &lt; <span class="number">0</span> || nx &gt;= m || ny &lt; <span class="number">0</span> || ny &gt;= n) <span class="keyword">continue</span> ;</span><br><span class="line">                <span class="keyword">if</span> (classroom[nx][ny] == <span class="string">&#x27;X&#x27;</span>) <span class="keyword">continue</span> ;</span><br><span class="line">                <span class="type">int</span> nenergy = energy - <span class="number">1</span> ;</span><br><span class="line">                <span class="keyword">if</span> (nenergy &lt; <span class="number">0</span>) <span class="keyword">continue</span> ;</span><br><span class="line">                <span class="type">int</span> nstatus = status ;</span><br><span class="line">                <span class="keyword">if</span> (classroom[nx][ny] == <span class="string">&#x27;R&#x27;</span>) nenergy = maxEnergy;</span><br><span class="line">                <span class="keyword">if</span> (classroom[nx][ny] == <span class="string">&#x27;L&#x27;</span>) nstatus |= (<span class="number">1</span> &lt;&lt; xyToId[nx][ny]);</span><br><span class="line">                <span class="keyword">if</span> (nenergy &lt;= vis[nx][ny][nstatus]) <span class="keyword">continue</span> ;</span><br><span class="line">                vis[nx][ny][nstatus] = nenergy ;</span><br><span class="line">                q.<span class="built_in">emplace</span>(nx,ny,nstatus,nenergy,step<span class="number">+1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/11/LeetCode-%E5%91%A8%E8%B5%9B-3548-%E7%AD%89%E5%92%8C%E7%9F%A9%E9%98%B5%E5%88%86%E5%89%B2/" class="archive-article-date">
-  	<time datetime="2025-05-11T15:14:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/11/LeetCode-%E5%91%A8%E8%B5%9B-3548-%E7%AD%89%E5%92%8C%E7%9F%A9%E9%98%B5%E5%88%86%E5%89%B2/">LeetCode 周赛 3548. 等和矩阵分割</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -189,307 +269,114 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/06/01/LeetCode-3568-%E6%B8%85%E7%90%86%E6%95%99%E5%AE%A4%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2025-05-08T15:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-08</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2025/06/03/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          编译原理期末复习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/05/28/LeetCode-3372-%E8%BF%9E%E6%8E%A5%E4%B8%A4%E6%A3%B5%E6%A0%91%E5%90%8E%E6%9C%80%E5%A4%A7%E7%9B%AE%E6%A0%87%E8%8A%82%E7%82%B9%E6%95%B0I/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 3372.连接两棵树后最大目标节点数I</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/">LeetCode 208. 实现Trie（前缀树）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="archive-article-date">
-  	<time datetime="2025-05-06T07:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">LeetCode 84.柱状图中的最大矩形</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/" class="archive-article-date">
-  	<time datetime="2025-05-05T16:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">LeetCode72_编辑距离</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2025-04-28T14:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">关于元学习的一些问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2025-04-27T10:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">算法笔记1——离散化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/" class="archive-article-date">
-  	<time datetime="2025-04-26T13:10:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/">Transformer面试指南</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2025-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">使用 Hexo 搭建个人博客教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术分享//" class="article-tag-list-link color5">技术分享</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2025/">&laquo; Prev</a><a class="page-number" href="/archives/2025/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -513,8 +400,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

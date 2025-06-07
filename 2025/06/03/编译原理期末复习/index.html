@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2025 | Sean.的个人博客~</title>
+  <title>编译原理期末复习 | Sean.的个人博客~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎联系xiwangai@bit.edu.cn">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sean.的个人博客~">
-<meta property="og:url" content="http://example.com/archives/2025/page/2/index.html">
+  <meta name="description" content="第二章 形式语言和自动机基础 1 文法  符号串集合A、B的运算：  乘积：AB表示这两个的乘积，实际上就是笛卡尔积，排列组合一下。 求幂：自己乘自己。要注意A^0 &#x3D; { ε } 。 求并：就是集合的并 求闭包：这个需要看一下了。A上面有个加号（A+）表示正闭包，就是说至少用一次A中的元素。加个星号表示自反闭包，可以一次都不用，实际上就是正闭包并上{ ε }  一部文法是一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理期末复习">
+<meta property="og:url" content="http://example.com/2025/06/03/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Sean.的个人博客~">
-<meta property="og:description" content="欢迎联系xiwangai@bit.edu.cn">
+<meta property="og:description" content="第二章 形式语言和自动机基础 1 文法  符号串集合A、B的运算：  乘积：AB表示这两个的乘积，实际上就是笛卡尔积，排列组合一下。 求幂：自己乘自己。要注意A^0 &#x3D; { ε } 。 求并：就是集合的并 求闭包：这个需要看一下了。A上面有个加号（A+）表示正闭包，就是说至少用一次A中的元素。加个星号表示自反闭包，可以一次都不用，实际上就是正闭包并上{ ε }  一部文法是一">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/image-20250603155536833.png">
+<meta property="og:image" content="http://example.com/images/image-20250605203849731.png">
+<meta property="og:image" content="http://example.com/images/image-20250606134228430.png">
+<meta property="article:published_time" content="2025-06-03T07:20:01.000Z">
+<meta property="article:modified_time" content="2025-06-06T07:36:15.197Z">
 <meta property="article:author" content="Sean.">
+<meta property="article:tag" content="计算机专业课">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/image-20250603155536833.png">
   
     <link rel="alternative" href="/atom.xml" title="Sean.的个人博客~" type="application/atom+xml">
   
@@ -148,348 +155,363 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-编译原理期末复习" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      编译原理期末复习
+    </h1>
+  
+
+        
+        <a href="/2025/06/03/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2025-06-03T07:20:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-03</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第二章-形式语言和自动机基础">第二章 形式语言和自动机基础</h1>
+<h3 id="文法">1 文法</h3>
+<ul>
+<li><p>符号串集合A、B的运算：</p>
+<ul>
+<li>乘积：AB表示这两个的乘积，实际上就是笛卡尔积，排列组合一下。</li>
+<li>求幂：自己乘自己。要注意A^0 = { ε } 。</li>
+<li>求并：就是集合的并</li>
+<li>求闭包：这个需要看一下了。A上面有个加号（A+）表示正闭包，就是说至少用一次A中的元素。加个星号表示自反闭包，可以一次都不用，实际上就是正闭包并上{
+ε }</li>
+</ul></li>
+<li><p>一部文法是一个四元组 <span
+class="math display"><em>G</em> = (<em>V</em><sub><em>N</em></sub>, <em>V</em><sub><em>T</em></sub>, <em>S</em>, <em>P</em>)</span>
+其中：Vn表示非终结符集合，Vt表示终结符集合，S表示开始符号，P表示有限产生式集合。</p></li>
+<li><p>产生式：就是文法的规则。比如a -&gt;
+b。S至少且必须在文法的某个产生式的左部出现一次</p></li>
+<li><p>语言：给定一个文法G，从文法的开始符号S开始，反复使用产生式对非终结符进行替换，最终得到的终结符串的全体，称为G的语言L(G)。</p>
+<ul>
+<li>例子：根据文法求文法的语言：<img
+src="/images/image-20250603153055516.png"
+alt="image-20250603153055516" /></li>
+</ul></li>
+<li><p>推导符号：=&gt;称为直接推导，也就是一步可以推。上面加个星号表示通过0步或任意步推导。加个＋号表示通过n步推导（n&gt;0）。</p></li>
+<li><p>句型：就是说对于G[S]，某个串a可以被G通过S，经过0步或者多步推导到，就说是句型。并且这里的a里面既可以有非终结符也可以有终结符。</p></li>
+<li><p>句子：跟句型的定义的唯一差别就是，句子只能有非终结符。</p></li>
+<li><p>最左推导：在推导的时候一直把句型的最左边的非终结符进行替换，就是最左推导。</p></li>
+<li><p>最右推导：也称为规范推导。仅用规范推导得到的句型称为规范句型。它的逆序叫规范规约。</p></li>
+<li><p>文法的递归：定义不好看懂，实际上直接递归就是某个规则的右边有左边那个非终结符。如果是A-&gt;AB，就叫直接左递归，直接右递归同理。间接递归就是虽然右边没有左边的非终结符，但是用其他规则推着推着就有了，就叫间接递归。</p></li>
+<li><p>文法的等价：如果L(G1) = L(G2)就说这俩等价</p></li>
+<li><p>文法的分类：</p>
+<ul>
+<li><p>0型文法：就是说每个规则a -&gt; b，没有任何限制。</p></li>
+<li><p>1型文法：除了S以外，每个产生式都是aAb -&gt; ayb的形式</p></li>
+<li><p>2型文法：这个就比较常见了，左边必须是非终结符。也就是A-&gt;b，b可以有非终结符和终结符</p></li>
+<li><p>3型文法：必须是A-&gt;aB，或者a-&gt;Ba，或者说A-&gt;a，其中A和B是非终结符，a是终结符。，也就是说非终结符要么不出现，要么只能在最左或最右。</p>
+<p><img src="/images/image-20250603155536833.png" /></p></li>
+</ul></li>
+</ul>
+<h3 id="有限自动机">2 有限自动机</h3>
+<ul>
+<li>DFA （确定的有限自动机）：<img
+src="/images/image-20250605193205029.png" />
+Q是状态的有限集合，/sum是输入字符的有限集合。f为状态转移函数,q0为初始态,Z为终态集合。剩下的形式定义、状态转换图什么的自己看看。
+<ul>
+<li>DFA的<strong>确定性</strong>体现在它的映射函数是一个单值函数，也就是说同一个状态接受一个字符后进入确定的下一个状态。</li>
+<li>NFA就不同，扫描到一个字母后，往往可以对应多种状态。比如C++里面读到+，token可能是++也可能是+=</li>
+</ul></li>
+<li>NFA（非确定有限自动机）：形式定义差不多，但是转换函数的后继状态不唯一。所有的NFA都可以化成DFA。也就是NFA的确定化</li>
+<li>NFA确定化的算法：子集法。
+<ul>
+<li>首先要知道什么是ε-closure(I)：在这个里面I是状态集的一个子集，ε-closure(I)表示对于I中的所有状态，不输入任何字符就能到达的状态集合。</li>
+<li>然后要知道什么是Ia，实际上就是I的闭包通过a能到达的所有元素</li>
+<li>NFA确定化的关键：消除ε弧(求ε-closure(I))、解决映射不唯一的问题（求Ia）。</li>
+</ul></li>
+<li>DFA的化简：就是说化简成状态数最少的形式。如果说不能化简了就说它是规约的，也说最小DFA。实现的思想是删除无关的状态。<strong>消除等价状态－划分法</strong>
+<ul>
+<li>第一步：按照终态和非终态化成两个集合。然后看每个集合中，每个元素走每个字母的结果一不一样，如果有不一样的，就要划分。</li>
+</ul></li>
+</ul>
+<h3 id="正规式和有限自动机">3 正规式和有限自动机</h3>
+<p>对于3型文法（也就是左线性和右线性文法）存在有限自动机能够表示该文法。</p>
+<ul>
+<li>文法和自动机的转换：如果文法中有
+S-&gt;aA，那么自动机里面就有S通过a到A。</li>
+<li>正规式和FA的转换：定理：FA可以转正规式，正规式可以转FA。
+<ul>
+<li>FA转正规式：
+<ul>
+<li>第一步：增加节点qs和qz，从qs引ε弧到q0，从所有z中状态引弧到qz</li>
+<li>用一些规则，逐步地消去M中的节点和弧。直到仅剩下qs、qz。</li>
+<li><img src="/images/image-20250605203849731.png" /></li>
+</ul></li>
+<li>正规式转FA：跟上面反着干就完了</li>
+</ul></li>
+</ul>
+<h2 id="第三章-词法分析">第三章 词法分析</h2>
+<ul>
+<li><p>单词：语言中具有独立意义的最小单位。一般用3型文法制约。常见的程序设计语言把单词分成关键字、标识符、常量、运算符、界限符。</p></li>
+<li><p>有一些是非单词和预处理成分，比如注释、#include
+、#define，这些都不是单词。</p></li>
+<li><p>属性字：对所识别的单词的数据结构表示。一个属性字包含Token和Code两个字段。Token表示了它是哪种单词，code表示实际上它是什么。比如对于变量x和a，他们的Token都是8000，但是code不一样。</p></li>
+<li><p>扫描器的设计和实现：首先对语言的各类单词分别构造状态图，然后把这些状态图合并</p></li>
+<li><p>词法分析器的自动生成：可以通过一个词法分析程序产生器来自动地构造这个扫描器。第一步：用正规式对语言的词法规则进行描述，正规式的输入形式实际上是LEX语言。首先把LEX源程序（即语言x的词法规则的描述）输入LEX编译器，得到c语言，再通过c语言编译器得到词法分析器。</p></li>
+</ul>
+<h2 id="第四章-语法分析">第四章 语法分析</h2>
+<p>自上而下分析法的核心是不断寻找合适的候选式对句型中的最左边的非终结符进行替换</p>
+<p>自下而上分析则是不断寻找可规约串与候选式匹配</p>
+<h3 id="自上而下分析">1 自上而下分析</h3>
+<ul>
+<li><p>不确定的自上而下分析：拿着产生式一个一个试探。但是存在回溯，导致开销大。而且存在直接或间接左递归就会导致死循环。</p></li>
+<li><p>消除文法的左递归：首先要知道怎么消除直接左递归。假设有这么一个规则
+<span
+class="math display"><em>P</em> → <em>P</em><em>α</em>|<em>β</em></span>
+那就把它改写成: <span class="math display">$$
+P \rightarrow \beta P^\prime \\
+P^\prime \rightarrow \alpha P^\prime | \varepsilon
+$$</span> 这样就不是左递归了。</p>
+<p>如果是间接左递归，就要先转化成直接左递归，就涉及到反复地带入。例如:
+<span class="math display">$$
+G(A) : A \rightarrow Ba | b B \\
+B \rightarrow Cb | c\\
+C \rightarrow Ac | dA
+$$</span> 首先把C带入B： <span
+class="math display"><em>B</em> → <em>A</em><em>c</em><em>b</em>|<em>d</em><em>A</em><em>b</em>|<em>c</em></span>
+再把这玩意代到A： <span
+class="math display"><em>A</em> → <em>A</em><em>c</em><em>b</em><em>a</em>|<em>d</em><em>A</em><em>b</em><em>a</em>|<em>c</em><em>a</em>|<em>b</em><em>B</em></span>
+一看，发现有一个直接左递归，所以用上面的方式消除： <span
+class="math display">$$
+A \rightarrow dAbaA^\prime | caA^\prime | bBA^\prime \\
+A^\prime \rightarrow cbaA^\prime | \varepsilon
+$$</span>
+然后还有最后一步，这个时候我们会发现C已经没什么用了。所以删除没用的规则C。最终就把它化简成：
+<span class="math display">$$
+A \rightarrow dAbaA^\prime | caA^\prime | bBA^\prime \\
+A^\prime \rightarrow cbaA^\prime | \varepsilon \\
+B \rightarrow Acb | dAb | c
+$$</span></p></li>
+<li><p>消除回溯：自上而下效率低的原因就是动不动就回溯，因为最原始的方法实际上是一个一个试，非常不优。所以提出以下：</p>
+<ul>
+<li>First集合：如果A是终结符，First(A)就是{A}，如果是非终结符，那First(A)就是A的所有候选式的First的并集。实际上就是看A的最前面能出现什么字符。</li>
+<li>First有什么用：如果对于一个规则，右边的所有候选式的First集合没有交集，那实际上就可以消除回溯了。</li>
+<li>但是如果有交集，那可以改写一下，提取一下<strong>公共左因子</strong>，也就是说新增一些非终结符。</li>
+</ul></li>
+<li><p>递归下降分析法：给每个非终结符增加一个分析程序，完成识别和分析任务。</p></li>
+<li><p>LL(1)分析法和LL(1)分析器：</p>
+<ul>
+<li><p>递归下降分析法是一种可行的自上而下分析实现的方法，但是它是通过隐式的递归调用来进行分析。而LL(1)是另一种方法，不用递归，而是维护一个状态栈。</p></li>
+<li><p>LL(1)：第一个L表示从左向右扫描，第二个表示最左推导。1表示最多向前面看一个字符。</p></li>
+<li><p>分析栈：存放文法符号。初始的时候，就放一个#(栈底标志)和一个S（文法的开始符号），然后开始用指针P扫描要分析的串：</p>
+<ul>
+<li>如果栈顶元素和P指向的元素都是#，说明分析成功了，停止程序。</li>
+<li>如果栈顶指的是一个终结符，那把它和P指的对比，如果一样，就pop，然后P后移。如果不一样说明匹配失败</li>
+<li>如果栈顶指的是一个非终结符，就得查<strong>分析表</strong>，我们查的元素在表里面叫M(X,ai)，也就是此时栈顶的非终结符那一行，对应的ai那一列，如果查到的东西是一个产生式，就先pop，再把产生式右边的东西按倒序入栈。如果查到空白，说明匹配失败出错了。</li>
+</ul></li>
+<li><p>分析表的构造：关键是知道非终结符遇到要匹配的终结符的时候用哪个候选式换。实际上就是利用First集合。假设现在有一个文法规则：
+<span class="math display"><em>A</em> → <em>α</em></span>
+并且对于终结符a: <span
+class="math display"><em>a</em> ∈ <em>F</em><em>i</em><em>r</em><em>s</em><em>t</em>(<em>α</em>)</span>
+那我们在分析表里面，A那一行，a那一列，就要写M(A,a) =
+。表示如果现在栈顶是A，指针指的是a，就用。</p>
+<p>但是我们会发现这么搞有个问题，如果First()里面有空字符，那如果a
+不在First()里面，也不一定匹配失败，因为可能换成空字符，然后和下一个非终结符匹配。</p>
+<p>所以我们引入了Follow集合，实际上Follow(A)就是谁能跟在A的屁股后面（包括#）。</p>
+<p>引入Follow集合的意思是，假设现在有一个规则是： <span
+class="math display"><em>A</em> → <em>α</em></span>
+如果，那非常简单，直接对于所有的a属于First()，A那行a那列写。</p>
+<p>但是如果，就得看Follow()和First()的并集如何。对于这个并集里面的所有元素，都做上面一样的操作。</p></li>
+</ul></li>
+<li><p>什么叫LL(1)文法：一部文法G，如果它的LL(1)分析表没有多重定义的入口，就是一个LL(1)文法。有这么些性质：</p>
+<ul>
+<li>任何LL(1)文法是无二义性的（很好理解，因为分析表没有重的嘛)</li>
+<li>左递归文法一定不是LL(1)文法。</li>
+<li>存在一种算法可以判定任何一个文法是不是LL(1)：实际上就是对于每个规则，看右边产生的集合是否相交。如果某个候选式推不出空，就看它的First和其他的有没有交集。如果推的出，就看First()和Follow(A)的并集和其他式子的First相不相交。</li>
+</ul></li>
+</ul>
+<h3 id="自下而上分析">2 自下而上分析</h3>
+<h4 id="移进-规约分析">2.1 移进-规约分析</h4>
+<ul>
+<li>短语：就比如一个句型aBc，其中B能用一步或多步推出一个东西，就说。如果B一步就能推出来。</li>
+<li>句柄：一个句型最左边的直接短语叫句柄。</li>
+</ul>
+<h4 id="算符优先分析法">2.2 算符优先分析法</h4>
+<p>如果一个文法的每个规则里面，右边都不会出现两个连续的非终结符，就说它是算符文法。</p>
+<p><img src="/images/image-20250606134228430.png" /></p>
+<h4 id="lr分析">2.3 LR分析</h4>
+<p>扫描模式：自左向右</p>
+<p>分析模式：最右推导的逆序</p>
+<ul>
+<li><p>活前缀：规范句型的不含句柄之后的任何符号的前缀。如果完全包含句柄但不含句柄之后任何符号，就叫可规前缀。</p></li>
+<li><p>LR分析过程中，栈中的符号始终是活前缀。如果构成了刚好包含句柄的活前缀（可规前缀），就实施规约。</p></li>
+<li><p>LR(0)项目：每个产生式的右部的任何位置上加个点就是LR(0)项目。其中的项目分为几类：</p>
+<ul>
+<li>规约项目：A-&gt;a.，表示句柄a恰好在栈里面，构成了可规前缀，就进行规约。</li>
+<li>接受项目：S’-&gt;a.，其中S’是开始符号，这样规约过后整个分析就成功了。</li>
+<li>移进项目：A-&gt;. a
+，这个时候没有构成活前缀，并且后面是一个终结符，那就需要把它移进分析栈。</li>
+<li>待约项目：和上面差不多，只是.后面是个非终结符，这个时候就需要规约。</li>
+</ul></li>
+<li><p>LR(0)项目规范集族：这里只谈构造方法：</p>
+<ul>
+<li>第一步：拓广文法，也就是说自己加一个新的开始符号S’，目的是使得文法的开始符号的候选式唯一。</li>
+<li>第二步：构造LR(0)项目规范集族：简单来说，从初始状态开始，每次求闭包。如果说点后面是一个非终结符A，就要把A的所有规则加进来，并且点在最左</li>
+</ul></li>
+<li><p>LR(0)分析表的构造：</p>
+<ul>
+<li>SN表示从M出发到达N,并且移进一个字母，rn表示用第n条规则去规约。GoTo表示直接转到目标状态</li>
+</ul></li>
+<li><p>如果产生了移进-规约冲突和规约-规约冲突，说明文法不是LR(0)文法。LR(0)文法存在的缺点在于只要能规约了就得规约，不管后面输入的是什么，实际上有时候不能规约。所以产生了SLR(1)</p></li>
+<li><p>SLR(1)，向后面观察一步，看输入的是什么决定是否规约。核心是要求解一下Follow集。比如现在有I
+= {A-&gt;b. ,
+B-&gt;c.}，求Follow(A)。只有输入的字母属于Follow(A)时，才可以用A-&gt;b规约。</p></li>
+<li><p>LR(1)分析：SLR(1)只看了Follow集合，也就是说只要新来的字母属于要规约的非终结符的Follow集合，就可以规约。但是实际上有时候并不科学，因为没考虑前面已经出现的东西。这个时候就出现了LR(1)，添加展望符，只有后面出现的东西是展望符的时候，才能用相应的式子规约，主要就是约束了规约的条件。下面讲怎么取展望符：</p>
+<ul>
+<li>如果点后面是文法开始符，那就填它的Follow集合。否则就往上找，在.后面紧跟的元素。</li>
+<li>如果说进入一个新的状态，就继承旧状态的展望符。</li>
+</ul></li>
+<li><p>LALR(1)分析：在LR(1)分析中，有的状态相互之间除了展望符不同，其他的规则都相同，这类叫同心项目集。LR(1)分析消耗的空间比较大，所以LALR(1)合并LR(1)中的同心项目集。合并完了过后，有时候会产生冲突。如果有冲突，那只能是新引入了规约-规约冲突，不会引入移进规约冲突。如果没冲突，说明这是一个LALR(1)文法。</p></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/11/LeetCode-%E5%91%A8%E8%B5%9B-3548-%E7%AD%89%E5%92%8C%E7%9F%A9%E9%98%B5%E5%88%86%E5%89%B2/" class="archive-article-date">
-  	<time datetime="2025-05-11T15:14:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/11/LeetCode-%E5%91%A8%E8%B5%9B-3548-%E7%AD%89%E5%92%8C%E7%9F%A9%E9%98%B5%E5%88%86%E5%89%B2/">LeetCode 周赛 3548. 等和矩阵分割</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">计算机专业课</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/06/03/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2025-05-08T15:26:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2025/06/01/LeetCode-3568-%E6%B8%85%E7%90%86%E6%95%99%E5%AE%A4%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode 3568.清理教室的最少移动</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/08/LeetCode-208-%E5%AE%9E%E7%8E%B0Trie%EF%BC%88%E5%89%8D%E7%BC%80%E6%A0%91%EF%BC%89/">LeetCode 208. 实现Trie（前缀树）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="archive-article-date">
-  	<time datetime="2025-05-06T07:55:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/06/LeetCode-84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">LeetCode 84.柱状图中的最大矩形</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/" class="archive-article-date">
-  	<time datetime="2025-05-05T16:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/05/06/LeetCode72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">LeetCode72_编辑距离</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2025-04-28T14:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/28/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">关于元学习的一些问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2025-04-27T10:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/27/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%A6%BB%E6%95%A3%E5%8C%96/">算法笔记1——离散化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/" class="archive-article-date">
-  	<time datetime="2025-04-26T13:10:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/Transformer%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97/">Transformer面试指南</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2025-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/26/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">使用 Hexo 搭建个人博客教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">博客搭建</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术分享//" class="article-tag-list-link color5">技术分享</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2025/">&laquo; Prev</a><a class="page-number" href="/archives/2025/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -513,8 +535,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
