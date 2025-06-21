@@ -150,6 +150,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-KGDPL：基于知识图谱的行为去噪与偏好学习序列推荐模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/06/20/KGDPL%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8E%BB%E5%99%AA%E4%B8%8E%E5%81%8F%E5%A5%BD%E5%AD%A6%E4%B9%A0%E5%BA%8F%E5%88%97%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B/">KGDPL：基于知识图谱的行为去噪与偏好学习序列推荐模型</a>
+    </h1>
+  
+
+        
+        <a href="/2025/06/20/KGDPL%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8E%BB%E5%99%AA%E4%B8%8E%E5%81%8F%E5%A5%BD%E5%AD%A6%E4%B9%A0%E5%BA%8F%E5%88%97%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
+  	<time datetime="2025-06-20T11:57:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1
+id="kgdpl基于知识图谱的行为去噪与偏好学习序列推荐模型">KGDPL：基于知识图谱的行为去噪与偏好学习序列推荐模型</h1>
+<p>题目：《Knowledge Graph-Based Behavior Denoising and Preference
+Learning for Sequential Recommendation》</p>
+<p>文章地址：<a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/10287604">Knowledge
+Graph-Based Behavior Denoising and Preference Learning for Sequential
+Recommendation | IEEE Journals &amp; Magazine | IEEE Xplore</a></p>
+<p><img src="/images/image-20250620202753852.png" /></p>
+<h2 id="引言">1 引言</h2>
+<p>传统的<strong>顺序推荐</strong>方法研究集中于使用<strong>用户的顺序行为</strong>去建模用户的动态偏好。这些研究大都存在两个问题：</p>
+<ul>
+<li>忽略用户行为序列中的<strong>噪声</strong>的负面影响。</li>
+<li>用户行为的<strong>稀疏性</strong>导致了很难从用户的历史行为中较好地学习用户的偏好。</li>
+</ul>
+<p>近年来，有少量研究尝试了<strong>知识图谱</strong>在顺序推荐中的应用，但这些研究大都假设知识图谱中的<strong>知识路径</strong>都是对推荐有用的，而这可能会引入KG中的无关信息带来的噪声。</p>
+<p>为了解决这些问题，本文提出了<strong>基于知识图谱的行为去噪和偏好学习模型KGDPL</strong>。其假设：知识图谱中的知识路径不仅可以帮助<strong>辨别用户行为序列中的噪声行为</strong>，还能为<strong>用户的后续行为预测提供辅助信息</strong>，进而提升推荐系统的准确性与可解释性。</p>
+<p>KGDPL主要包含三个关键模块：</p>
+<ol type="1">
+<li><strong>知识路径选择模块</strong>：该模块利用监督学习策略，从知识图谱中挖掘出<strong>与推荐任务相关性高的有效路径</strong>。通过<strong>滑动窗口</strong>划分用户历史序列，并计算候选路径在历史行为与预测行为之间的连接能力，筛除与用户兴趣无关的冗余路径，从而避免KG噪声的引入。</li>
+<li><strong>知识增强的行为去噪模块</strong>：该模块在选定知识路径的基础上，建模物品之间的语义关联，识别并降低历史序列中噪声行为的影响。借助知识图谱中保留的结构信息，模型能够更准确地区分偏好驱动行为与随机探索行为，提升历史行为表示的纯度。</li>
+<li><strong>知识增强的偏好学习模块</strong>：该模块融合了知识路径信息和用户的历史行为序列，构建面向时间演化的用户表示，以捕捉个性化、动态的偏好特征。同时，该模块还具备一定的可解释性，能够通过显式路径为推荐结果提供语义标签与解释。</li>
+</ol>
+<p>作者在四个真实数据集上进行了实验，结果表明KGDPL在准确率、召回率和可解释性方面均显著优于现有的主流顺序推荐模型，尤其在用户行为稀疏或包含大量噪声的场景下表现更为稳健。</p>
+<h2 id="模型结构">2 模型结构</h2>
+<h3 id="知识路径选择模块">2.1 知识路径选择模块</h3>
+<p>我们知道，知识图谱中包含了丰富的关于item的辅助信息，而<strong>知识路径</strong>则反映了项目之间的各种关系，例如同一导演的电影和同一作者的书籍，这些知识路径对于预测用户的下一步行为非常有用。然而如上文所说，并不是所有知识路径都是对推荐有用的，有的会带来噪声。所以作者提出了如下图的知识路径选择模块：</p>
+<p><img src="/images/image-20250621221025702.png" /></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">论文阅读笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/06/20/KGDPL%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8E%BB%E5%99%AA%E4%B8%8E%E5%81%8F%E5%A5%BD%E5%AD%A6%E4%B9%A0%E5%BA%8F%E5%88%97%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-编译原理期末复习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -338,7 +439,7 @@ class="math display"><em>A</em> → <em>α</em></span>
 <p>扫描模式：自左向右</p>
 <p>分析模式：最右推导的逆序</p>
 <ul>
-<li><p>活前缀：规范句型的不含句柄之后的任何符号的前缀。如果完全包含句柄但不含句柄之后任何符号，就叫可规前缀。</p></li>
+<li><p>活前缀：规范句型的<strong>不含句柄之后的任何符号</strong>的前缀。如果<strong>完全包含句柄但不含句柄之后任何符号</strong>，就叫<strong>可规前缀</strong>。</p></li>
 <li><p>LR分析过程中，栈中的符号始终是活前缀。如果构成了刚好包含句柄的活前缀（可规前缀），就实施规约。</p></li>
 <li><p>LR(0)项目：每个产生式的右部的任何位置上加个点就是LR(0)项目。其中的项目分为几类：</p>
 <ul>
@@ -367,6 +468,61 @@ B-&gt;c.}，求Follow(A)。只有输入的字母属于Follow(A)时，才可以�
 <li>如果说进入一个新的状态，就继承旧状态的展望符。</li>
 </ul></li>
 <li><p>LALR(1)分析：在LR(1)分析中，有的状态相互之间除了展望符不同，其他的规则都相同，这类叫同心项目集。LR(1)分析消耗的空间比较大，所以LALR(1)合并LR(1)中的同心项目集。合并完了过后，有时候会产生冲突。如果有冲突，那只能是新引入了规约-规约冲突，不会引入移进规约冲突。如果没冲突，说明这是一个LALR(1)文法。</p></li>
+</ul>
+<h2 id="第八章-代码优化">第八章 代码优化</h2>
+<h3 id="优化技术的分类">0 优化技术的分类</h3>
+<ul>
+<li>局部优化：在基本块内进行优化</li>
+<li>循环优化：在隐式和显式的循环体内优化</li>
+<li>全局优化：在一个源程序范围内优化</li>
+<li>中间代码级优化：在目标代码生成前做的优化</li>
+<li>目标代码级优化：在目标代码生成后的优化</li>
+</ul>
+<h3 id="局部优化基本块和控制流图">1 局部优化（基本块和控制流图）</h3>
+<ul>
+<li><p>基本块：顺序执行的最大语句序列。</p></li>
+<li><p>入口语句：只能是以下三种语句</p>
+<ul>
+<li>程序的第一个语句</li>
+<li>由条件或无条件转移语句转移到的语句</li>
+<li>紧跟在一个条件转移或非条件转移语句后面的语句</li>
+</ul></li>
+<li><p>根据基本块的入口语句就可以构造出基本块。具体来说一个基本块是由入口语句直到下一个入口语句之间的所有语句构成的。凡是不属于任何一个基本块的语句，都可以直接删除。</p></li>
+<li><p>程序流图的每个结点是一个基本块，基本块可以用DAG表示。在DAG中合并结点可以对四元式代码进行优化。</p></li>
+</ul>
+<h3 id="循环优化">2 循环优化</h3>
+<ul>
+<li>具有以下性质的结点序列构成一个循环：强连通性、入口唯一。</li>
+<li>必经结点：如果从初始结点n0出发，到达nj的任何一条通路都必须经过ni，则ni是nj的必经结点，记作ni
+DOM nj。一个结点n的必经结点构成了n的必经结点集。</li>
+<li>回边：如果b DOM a，但是有一条边a -&gt; b，则这条边叫回边。</li>
+<li>查找循环的步骤：
+<ul>
+<li>确定D(n)。</li>
+<li>由D(n)寻找回边。</li>
+<li>通过回边确定循环。</li>
+</ul></li>
+</ul>
+<h3 id="数据流分析">3 数据流分析</h3>
+<ul>
+<li><p>定值点：变量x获得值的中间代码的位置d，就称为定值点。</p></li>
+<li><p>引用点：引用变量x的中间代码的位置d，称为x的引用点。</p></li>
+<li><p>到达-定值：如果变量A在流图中某点d的定值，到达了另一个点p，指的是图中有一个通路到达p，并且这个通路上没有对d再次定值。</p></li>
+<li><p>ud链：如果程序中某点p引用了A的值，则把G中能到达P的A的定值点的全体叫做A在P的引用-定值链（ud链）。简单来说就是有个点引用了A，就看谁能把A的值送来这个点。</p></li>
+<li><p>活跃变量：如果存在一条从P开始的通路，其中引用了A在p的值，则A在P是活跃的。否则说他是死亡的。</p></li>
+<li><p>du链：和ud链相反，就是说在某个点P定值了A，看这个值能到达哪里。</p></li>
+<li><p>in、out、gen：</p>
+<ul>
+<li>in(Bi)：能够到达基本块Bi入口点之前的各个变量的所有定值点集</li>
+<li>out(Bi)：能够到达Bi出口之后的各个变量的定值点集合</li>
+<li>gen(Bi)：在Bi里面定值并且能够到达Bi出口的所有定值点集合。</li>
+<li>kill(Bi)：在Bi中定值的量，在其他地方的定值点的集合。</li>
+</ul>
+<p><img src="/images/image-20250610214417584.png" /></p></li>
+<li><p>def
+、use：def(B)表示在基本块B中定值，且定值前未曾在B中引用过的变量的集合。use(B)相反。</p></li>
+<li><p>代码外提：将循环中的不变运算提到循环的前置结点中。</p></li>
+<li><p>查找不变运算：看循环中的每个语句，如果有个语句的运算对象是常数或者定值点在L外（根据ud链判断)，则这个语句就是不变运算。</p></li>
 </ul>
 
       
@@ -929,9 +1085,16 @@ class="math display"><em>g</em><em>c</em><em>d</em>(<em>a</em>, <em>b</em>, 
 <p>一般来说操作系统中有两种程序：<strong>操作系统内核程序</strong>和<strong>用户自编程序(也叫应用程序)</strong>。前者管理后者，并且可以使用一些后者不能使用的<strong>特权指令</strong>。具体实现的时候，把CPU的运行模式分为<strong>用户态</strong>和<strong>核心态</strong>。</p>
 <p><strong>内核</strong>（Kernel）是作为可信软件来提供<strong>支持进程并发执行</strong>的基本操作的一组程序模块，运行于核心态，是仅有的能够执行特权指令的那部分程序。</p>
 <h4 id="中断和异常">1.3.1 中断和异常</h4>
+<p>中断和异常都是指系统发生某个事件之后，CPU暂停正在执行的程序，转去执行处理该事件的程序的过程。</p>
 <p><strong>中断（Interruption）</strong>也称外中断，指来自CPU执行指令<strong>外部</strong>的事件，通常用于信息的输入输出。比如设备发出的I/O结束中断。</p>
+<blockquote>
+<p>中断的引入是为了开发CPU和通道、设备之间的并行操作。当CPU启动通道进行输入输出后，通道就可以独立工作了，CPU也可以转去执行和输入输出不相关的事情。然后通道的输入输出完成后，还要发出中断告诉CPU输入输出结束</p>
+</blockquote>
 <p><strong>异常（Exception）</strong>也称内中断，指来自CPU执行指令内部的事件，比如程序的地址越界等引起的事件。</p>
 <p>通常情况下，程序在执行某条指令后，发现一个中断请求信号，则CPU打断当前的应用程序，转到相应的<strong>中断处理程序</strong>去执行。具体处理过程由操作系统完成。中断处理程序和打断的程序是相互独立的。</p>
+<blockquote>
+<p>中断来自外设等，和正在执行的指令没有关系，可以屏蔽。异常来源于正在执行的程序本身，不能屏蔽。</p>
+</blockquote>
 <h3 id="操作系统的结构">1.4 操作系统的结构</h3>
 <blockquote>
 <p>省略</p>
@@ -1009,6 +1172,10 @@ SRTF）</p>
 <h4 id="线程">2.1.5 线程</h4>
 <p>随着计算机的发展，需要加速单个作业步的速度。而同一个作业步的工作是有可并行成分的。引入线程后，<strong>进程只作为CPU以外资源的分配单位，而线程（thread，也叫轻权进程）作为分配CPU资源的单位。</strong></p>
 <p><strong>线程（thread)</strong>是进程内的一个可执行实体，是处理机调度的基本单位。进程中的所有线程共享进程中的存储空间和资源。</p>
+<blockquote>
+<p>在操作系统中，引入线程是为了提高系统的并发性和资源利用率。进程是操作系统进行资源分配和调度的基本单位，但是由于进程的创建、撤销、切换需要较大的开销，并且同一个作业步内的工作也是有可并行成分的，所以引入了线程。引入线程后，进程是除了CPU以外资源分配的基本单位，线程是分配CPU资源的单位。</p>
+<p>多个线程共享进程的资源和方法区，但是每个线程有自己的程序计数器、虚拟机栈和本地方法栈。</p>
+</blockquote>
 <h5 id="线程的实现机制">线程的实现机制</h5>
 <ul>
 <li>用户级线程： 处理机在两个线程切换时，不用进入到核心态执行。</li>
@@ -1068,6 +1235,24 @@ src="/images/image-20250521110057188.png" /></p></li>
 </ul>
 <h3 id="进程的死锁">2.4 进程的死锁</h3>
 <p>在一个进程集合中，如果每个进程都在等待某些事件的发生，而这些事件又必须由该进程集合中的某些进程来产生，则称该进程集合处于<strong>死锁</strong>状态。</p>
+<ul>
+<li>死锁的必要条件：
+<ul>
+<li>互斥：必须存在需要互斥使用的资源</li>
+<li>占有等待：一定存在占有资源但是又等待资源的进程</li>
+<li>非剥夺：进程占有的资源，除非主动释放，否则不可剥夺</li>
+<li>循环等待：A等B，B又等C，C又等A</li>
+</ul></li>
+<li>死锁的<strong>预防</strong>：预防是指在设计阶段就采取措施破坏死锁发生的必要条件。但是可能导致资源利用率低和系统的吞吐率下降
+<ul>
+<li>比如：采用资源顺序分配（给每类资源编号，进程只能按序号由小到大分配资源）、让资源共享使用、将进程所需要的资源一次性全部分配等。</li>
+</ul></li>
+<li>死锁的<strong>避免</strong>：在系统<strong>运行阶段</strong>检测和调整资源分配策略，使得系统始终保持在<strong>安全状态</strong>。
+<ul>
+<li>比如银行家算法，动态地调整分配策略。</li>
+</ul></li>
+<li>银行家算法：四个</li>
+</ul>
 <h2 id="第三章-存储管理">第三章 存储管理</h2>
 <h3 id="地址重定位">3.1 地址重定位</h3>
 <p>当程序被装入内存时，程序的逻辑地址被转换为内存的物理地址。（由内存管理单元MMU完成）</p>
@@ -1628,111 +1813,6 @@ alt="image-20250518214307936" />
 
 
   
-    <article id="post-推荐系统入门01——基本概念与链路" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/14/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A801%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%93%BE%E8%B7%AF/">推荐系统入门01——基本概念与链路</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/14/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A801%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%93%BE%E8%B7%AF/" class="archive-article-date">
-  	<time datetime="2025-05-14T10:06:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="基本概念">基本概念</h4>
-<ul>
-<li><p>曝光： 系统把一篇笔记展示给用户，这叫做曝光impression</p></li>
-<li><p>消费指标：反映用户对推荐是否满意的指标，线下实验时，我们希望新的算法能在这些指标上面超越原有的算法,短期消费指标都是有意的，但可能不是评价推荐系统好坏的根本指标。</p>
-<figure>
-<img src="/images/eaa1721c70cdab9a4f5f6f831e38ccfa.png" alt="image-1" />
-<figcaption aria-hidden="true">image-1</figcaption>
-</figure></li>
-<li><p>北极星指标：衡量推荐系统的好坏，最重要的指标叫做北极星指标，有这样几个北极星指标</p></li>
-</ul>
-<p>​ <img src="/images/35bdf204f3f0857da02548ad9d35146b.png"
-alt="北极星指标" /></p>
-<ul>
-<li>北极星指标都是线上指标，只能通过线上实验获得，做离线实验无法得到这些指标。
-具体做法是开小流量内地测试，把用户随机分为实验组的对照组，实验组用新策略，对照组用旧策略。</li>
-</ul>
-<p>​ <img src="/images/d099dd45850acaebff3ec5cd745c6d9b.png"
-alt="实验流程" /></p>
-<h4 id="推荐系统的链路">推荐系统的链路</h4>
-<figure>
-<img src="/images/image-20250514180738273.png" alt="image-2" />
-<figcaption aria-hidden="true">image-2</figcaption>
-</figure>
-<ul>
-<li>召回：从数据库中快速取回一些物品，例如小红书中，系统会同时调用几十条召回通道，每条召回通道取回几百条笔记，总共召回几千篇笔记（也称多路召回）</li>
-<li>粗排：使用规模比较小的机器学习模型打分，保留分数比较高的几百条笔记</li>
-<li>精排：用大规模的深度神经网络打分。精排模型比粗排大很多，所以更可靠。分开粗排、精排可以平衡计算量和正确性。</li>
-<li>重排：根据精排分数进行抽样，得到几十篇笔记，然后把相似内容打散（不能把相似的内容排在相同位置）并插入广告之类信息。</li>
-</ul>
-<h5
-id="召回通道协同过滤双塔模型关注的作者等等">召回通道：协同过滤、双塔模型、关注的作者等等。</h5>
-<h4 id="section"></h4>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">推荐系统入门</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/14/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A801%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%93%BE%E8%B7%AF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1892,6 +1972,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CCF-CSP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">论文阅读笔记</a>
               </li>
             
             <div class="clearfix"></div>

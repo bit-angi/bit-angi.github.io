@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://example.com/images/image-20250525151901301.png">
 <meta property="og:image" content="http://example.com/images/image-20250525151924599.png">
 <meta property="article:published_time" content="2025-05-20T14:03:53.000Z">
-<meta property="article:modified_time" content="2025-05-27T14:48:20.578Z">
+<meta property="article:modified_time" content="2025-06-11T13:15:39.506Z">
 <meta property="article:author" content="Sean.">
 <meta property="article:tag" content="计算机专业课">
 <meta name="twitter:card" content="summary">
@@ -220,9 +220,16 @@
 <p>一般来说操作系统中有两种程序：<strong>操作系统内核程序</strong>和<strong>用户自编程序(也叫应用程序)</strong>。前者管理后者，并且可以使用一些后者不能使用的<strong>特权指令</strong>。具体实现的时候，把CPU的运行模式分为<strong>用户态</strong>和<strong>核心态</strong>。</p>
 <p><strong>内核</strong>（Kernel）是作为可信软件来提供<strong>支持进程并发执行</strong>的基本操作的一组程序模块，运行于核心态，是仅有的能够执行特权指令的那部分程序。</p>
 <h4 id="中断和异常">1.3.1 中断和异常</h4>
+<p>中断和异常都是指系统发生某个事件之后，CPU暂停正在执行的程序，转去执行处理该事件的程序的过程。</p>
 <p><strong>中断（Interruption）</strong>也称外中断，指来自CPU执行指令<strong>外部</strong>的事件，通常用于信息的输入输出。比如设备发出的I/O结束中断。</p>
+<blockquote>
+<p>中断的引入是为了开发CPU和通道、设备之间的并行操作。当CPU启动通道进行输入输出后，通道就可以独立工作了，CPU也可以转去执行和输入输出不相关的事情。然后通道的输入输出完成后，还要发出中断告诉CPU输入输出结束</p>
+</blockquote>
 <p><strong>异常（Exception）</strong>也称内中断，指来自CPU执行指令内部的事件，比如程序的地址越界等引起的事件。</p>
 <p>通常情况下，程序在执行某条指令后，发现一个中断请求信号，则CPU打断当前的应用程序，转到相应的<strong>中断处理程序</strong>去执行。具体处理过程由操作系统完成。中断处理程序和打断的程序是相互独立的。</p>
+<blockquote>
+<p>中断来自外设等，和正在执行的指令没有关系，可以屏蔽。异常来源于正在执行的程序本身，不能屏蔽。</p>
+</blockquote>
 <h3 id="操作系统的结构">1.4 操作系统的结构</h3>
 <blockquote>
 <p>省略</p>
@@ -300,6 +307,10 @@ SRTF）</p>
 <h4 id="线程">2.1.5 线程</h4>
 <p>随着计算机的发展，需要加速单个作业步的速度。而同一个作业步的工作是有可并行成分的。引入线程后，<strong>进程只作为CPU以外资源的分配单位，而线程（thread，也叫轻权进程）作为分配CPU资源的单位。</strong></p>
 <p><strong>线程（thread)</strong>是进程内的一个可执行实体，是处理机调度的基本单位。进程中的所有线程共享进程中的存储空间和资源。</p>
+<blockquote>
+<p>在操作系统中，引入线程是为了提高系统的并发性和资源利用率。进程是操作系统进行资源分配和调度的基本单位，但是由于进程的创建、撤销、切换需要较大的开销，并且同一个作业步内的工作也是有可并行成分的，所以引入了线程。引入线程后，进程是除了CPU以外资源分配的基本单位，线程是分配CPU资源的单位。</p>
+<p>多个线程共享进程的资源和方法区，但是每个线程有自己的程序计数器、虚拟机栈和本地方法栈。</p>
+</blockquote>
 <h5 id="线程的实现机制">线程的实现机制</h5>
 <ul>
 <li>用户级线程： 处理机在两个线程切换时，不用进入到核心态执行。</li>
@@ -359,6 +370,24 @@ src="/images/image-20250521110057188.png" /></p></li>
 </ul>
 <h3 id="进程的死锁">2.4 进程的死锁</h3>
 <p>在一个进程集合中，如果每个进程都在等待某些事件的发生，而这些事件又必须由该进程集合中的某些进程来产生，则称该进程集合处于<strong>死锁</strong>状态。</p>
+<ul>
+<li>死锁的必要条件：
+<ul>
+<li>互斥：必须存在需要互斥使用的资源</li>
+<li>占有等待：一定存在占有资源但是又等待资源的进程</li>
+<li>非剥夺：进程占有的资源，除非主动释放，否则不可剥夺</li>
+<li>循环等待：A等B，B又等C，C又等A</li>
+</ul></li>
+<li>死锁的<strong>预防</strong>：预防是指在设计阶段就采取措施破坏死锁发生的必要条件。但是可能导致资源利用率低和系统的吞吐率下降
+<ul>
+<li>比如：采用资源顺序分配（给每类资源编号，进程只能按序号由小到大分配资源）、让资源共享使用、将进程所需要的资源一次性全部分配等。</li>
+</ul></li>
+<li>死锁的<strong>避免</strong>：在系统<strong>运行阶段</strong>检测和调整资源分配策略，使得系统始终保持在<strong>安全状态</strong>。
+<ul>
+<li>比如银行家算法，动态地调整分配策略。</li>
+</ul></li>
+<li>银行家算法：四个</li>
+</ul>
 <h2 id="第三章-存储管理">第三章 存储管理</h2>
 <h3 id="地址重定位">3.1 地址重定位</h3>
 <p>当程序被装入内存时，程序的逻辑地址被转换为内存的物理地址。（由内存管理单元MMU完成）</p>
@@ -832,6 +861,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CCF-CSP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">论文阅读笔记</a>
               </li>
             
             <div class="clearfix"></div>

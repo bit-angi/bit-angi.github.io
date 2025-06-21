@@ -18,8 +18,9 @@
 <meta property="og:image" content="http://example.com/images/image-20250603155536833.png">
 <meta property="og:image" content="http://example.com/images/image-20250605203849731.png">
 <meta property="og:image" content="http://example.com/images/image-20250606134228430.png">
+<meta property="og:image" content="http://example.com/images/image-20250610214417584.png">
 <meta property="article:published_time" content="2025-06-03T07:20:01.000Z">
-<meta property="article:modified_time" content="2025-06-06T07:36:15.197Z">
+<meta property="article:modified_time" content="2025-06-21T13:46:50.584Z">
 <meta property="article:author" content="Sean.">
 <meta property="article:tag" content="计算机专业课">
 <meta name="twitter:card" content="summary">
@@ -343,7 +344,7 @@ class="math display"><em>A</em> → <em>α</em></span>
 <p>扫描模式：自左向右</p>
 <p>分析模式：最右推导的逆序</p>
 <ul>
-<li><p>活前缀：规范句型的不含句柄之后的任何符号的前缀。如果完全包含句柄但不含句柄之后任何符号，就叫可规前缀。</p></li>
+<li><p>活前缀：规范句型的<strong>不含句柄之后的任何符号</strong>的前缀。如果<strong>完全包含句柄但不含句柄之后任何符号</strong>，就叫<strong>可规前缀</strong>。</p></li>
 <li><p>LR分析过程中，栈中的符号始终是活前缀。如果构成了刚好包含句柄的活前缀（可规前缀），就实施规约。</p></li>
 <li><p>LR(0)项目：每个产生式的右部的任何位置上加个点就是LR(0)项目。其中的项目分为几类：</p>
 <ul>
@@ -372,6 +373,61 @@ B-&gt;c.}，求Follow(A)。只有输入的字母属于Follow(A)时，才可以�
 <li>如果说进入一个新的状态，就继承旧状态的展望符。</li>
 </ul></li>
 <li><p>LALR(1)分析：在LR(1)分析中，有的状态相互之间除了展望符不同，其他的规则都相同，这类叫同心项目集。LR(1)分析消耗的空间比较大，所以LALR(1)合并LR(1)中的同心项目集。合并完了过后，有时候会产生冲突。如果有冲突，那只能是新引入了规约-规约冲突，不会引入移进规约冲突。如果没冲突，说明这是一个LALR(1)文法。</p></li>
+</ul>
+<h2 id="第八章-代码优化">第八章 代码优化</h2>
+<h3 id="优化技术的分类">0 优化技术的分类</h3>
+<ul>
+<li>局部优化：在基本块内进行优化</li>
+<li>循环优化：在隐式和显式的循环体内优化</li>
+<li>全局优化：在一个源程序范围内优化</li>
+<li>中间代码级优化：在目标代码生成前做的优化</li>
+<li>目标代码级优化：在目标代码生成后的优化</li>
+</ul>
+<h3 id="局部优化基本块和控制流图">1 局部优化（基本块和控制流图）</h3>
+<ul>
+<li><p>基本块：顺序执行的最大语句序列。</p></li>
+<li><p>入口语句：只能是以下三种语句</p>
+<ul>
+<li>程序的第一个语句</li>
+<li>由条件或无条件转移语句转移到的语句</li>
+<li>紧跟在一个条件转移或非条件转移语句后面的语句</li>
+</ul></li>
+<li><p>根据基本块的入口语句就可以构造出基本块。具体来说一个基本块是由入口语句直到下一个入口语句之间的所有语句构成的。凡是不属于任何一个基本块的语句，都可以直接删除。</p></li>
+<li><p>程序流图的每个结点是一个基本块，基本块可以用DAG表示。在DAG中合并结点可以对四元式代码进行优化。</p></li>
+</ul>
+<h3 id="循环优化">2 循环优化</h3>
+<ul>
+<li>具有以下性质的结点序列构成一个循环：强连通性、入口唯一。</li>
+<li>必经结点：如果从初始结点n0出发，到达nj的任何一条通路都必须经过ni，则ni是nj的必经结点，记作ni
+DOM nj。一个结点n的必经结点构成了n的必经结点集。</li>
+<li>回边：如果b DOM a，但是有一条边a -&gt; b，则这条边叫回边。</li>
+<li>查找循环的步骤：
+<ul>
+<li>确定D(n)。</li>
+<li>由D(n)寻找回边。</li>
+<li>通过回边确定循环。</li>
+</ul></li>
+</ul>
+<h3 id="数据流分析">3 数据流分析</h3>
+<ul>
+<li><p>定值点：变量x获得值的中间代码的位置d，就称为定值点。</p></li>
+<li><p>引用点：引用变量x的中间代码的位置d，称为x的引用点。</p></li>
+<li><p>到达-定值：如果变量A在流图中某点d的定值，到达了另一个点p，指的是图中有一个通路到达p，并且这个通路上没有对d再次定值。</p></li>
+<li><p>ud链：如果程序中某点p引用了A的值，则把G中能到达P的A的定值点的全体叫做A在P的引用-定值链（ud链）。简单来说就是有个点引用了A，就看谁能把A的值送来这个点。</p></li>
+<li><p>活跃变量：如果存在一条从P开始的通路，其中引用了A在p的值，则A在P是活跃的。否则说他是死亡的。</p></li>
+<li><p>du链：和ud链相反，就是说在某个点P定值了A，看这个值能到达哪里。</p></li>
+<li><p>in、out、gen：</p>
+<ul>
+<li>in(Bi)：能够到达基本块Bi入口点之前的各个变量的所有定值点集</li>
+<li>out(Bi)：能够到达Bi出口之后的各个变量的定值点集合</li>
+<li>gen(Bi)：在Bi里面定值并且能够到达Bi出口的所有定值点集合。</li>
+<li>kill(Bi)：在Bi中定值的量，在其他地方的定值点的集合。</li>
+</ul>
+<p><img src="/images/image-20250610214417584.png" /></p></li>
+<li><p>def
+、use：def(B)表示在基本块B中定值，且定值前未曾在B中引用过的变量的集合。use(B)相反。</p></li>
+<li><p>代码外提：将循环中的不变运算提到循环的前置结点中。</p></li>
+<li><p>查找不变运算：看循环中的每个语句，如果有个语句的运算对象是常数或者定值点在L外（根据ud链判断)，则这个语句就是不变运算。</p></li>
 </ul>
 
       
@@ -476,6 +532,15 @@ B-&gt;c.}，求Follow(A)。只有输入的字母属于Follow(A)时，才可以�
 
   
 <nav id="article-nav">
+  
+    <a href="/2025/06/20/KGDPL%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8E%BB%E5%99%AA%E4%B8%8E%E5%81%8F%E5%A5%BD%E5%AD%A6%E4%B9%A0%E5%BA%8F%E5%88%97%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          KGDPL：基于知识图谱的行为去噪与偏好学习序列推荐模型
+        
+      </div>
+    </a>
   
   
     <a href="/2025/06/01/LeetCode-3568-%E6%B8%85%E7%90%86%E6%95%99%E5%AE%A4%E7%9A%84%E6%9C%80%E5%B0%91%E7%A7%BB%E5%8A%A8/" id="article-nav-older" class="article-nav-link-wrap">
@@ -667,6 +732,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CCF-CSP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">论文阅读笔记</a>
               </li>
             
             <div class="clearfix"></div>

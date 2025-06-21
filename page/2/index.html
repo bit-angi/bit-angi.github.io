@@ -150,6 +150,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-推荐系统入门01——基本概念与链路" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/14/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A801%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%93%BE%E8%B7%AF/">推荐系统入门01——基本概念与链路</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/14/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A801%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%93%BE%E8%B7%AF/" class="archive-article-date">
+  	<time datetime="2025-05-14T10:06:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基本概念">基本概念</h4>
+<ul>
+<li><p>曝光： 系统把一篇笔记展示给用户，这叫做曝光impression</p></li>
+<li><p>消费指标：反映用户对推荐是否满意的指标，线下实验时，我们希望新的算法能在这些指标上面超越原有的算法,短期消费指标都是有意的，但可能不是评价推荐系统好坏的根本指标。</p>
+<figure>
+<img src="/images/eaa1721c70cdab9a4f5f6f831e38ccfa.png" alt="image-1" />
+<figcaption aria-hidden="true">image-1</figcaption>
+</figure></li>
+<li><p>北极星指标：衡量推荐系统的好坏，最重要的指标叫做北极星指标，有这样几个北极星指标</p></li>
+</ul>
+<p>​ <img src="/images/35bdf204f3f0857da02548ad9d35146b.png"
+alt="北极星指标" /></p>
+<ul>
+<li>北极星指标都是线上指标，只能通过线上实验获得，做离线实验无法得到这些指标。
+具体做法是开小流量内地测试，把用户随机分为实验组的对照组，实验组用新策略，对照组用旧策略。</li>
+</ul>
+<p>​ <img src="/images/d099dd45850acaebff3ec5cd745c6d9b.png"
+alt="实验流程" /></p>
+<h4 id="推荐系统的链路">推荐系统的链路</h4>
+<figure>
+<img src="/images/image-20250514180738273.png" alt="image-2" />
+<figcaption aria-hidden="true">image-2</figcaption>
+</figure>
+<ul>
+<li>召回：从数据库中快速取回一些物品，例如小红书中，系统会同时调用几十条召回通道，每条召回通道取回几百条笔记，总共召回几千篇笔记（也称多路召回）</li>
+<li>粗排：使用规模比较小的机器学习模型打分，保留分数比较高的几百条笔记</li>
+<li>精排：用大规模的深度神经网络打分。精排模型比粗排大很多，所以更可靠。分开粗排、精排可以平衡计算量和正确性。</li>
+<li>重排：根据精排分数进行抽样，得到几十篇笔记，然后把相似内容打散（不能把相似的内容排在相同位置）并插入广告之类信息。</li>
+</ul>
+<h5
+id="召回通道协同过滤双塔模型关注的作者等等">召回通道：协同过滤、双塔模型、关注的作者等等。</h5>
+<h4 id="section"></h4>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">推荐系统入门</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/14/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%85%A5%E9%97%A801%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E9%93%BE%E8%B7%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-LeetCode-周赛-3548-等和矩阵分割" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1272,6 +1377,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CCF-CSP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">论文阅读笔记</a>
               </li>
             
             <div class="clearfix"></div>
