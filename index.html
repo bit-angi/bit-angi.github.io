@@ -198,6 +198,224 @@ Recommendation | IEEE Journals &amp; Magazine | IEEE Xplore</a></p>
 <h3 id="知识路径选择模块">2.1 知识路径选择模块</h3>
 <p>我们知道，知识图谱中包含了丰富的关于item的辅助信息，而<strong>知识路径</strong>则反映了项目之间的各种关系，例如同一导演的电影和同一作者的书籍，这些知识路径对于预测用户的下一步行为非常有用。然而如上文所说，并不是所有知识路径都是对推荐有用的，有的会带来噪声。所以作者提出了如下图的知识路径选择模块：</p>
 <p><img src="/images/image-20250621221025702.png" /></p>
+<p>具体的做法有几个关键点：</p>
+<ol type="1">
+<li><p><strong>将推荐系统中的 item
+映射到知识图谱中的实体</strong>，从而获取它们之间在知识图谱中的<strong>候选路径</strong>（例如“两跳路径”表示两个物品之间通过两个关系连接起来，比如“电影A
+—导演→ 导演X —导演→ 电影B”）。</p></li>
+<li><p><strong>对用户的行为序列应用滑动窗口</strong>，模拟用户的真实交互过程。在每个窗口中，划分出<strong>“历史部分”和“目标
+item”</strong>（即滑窗最后一个 item），并在 KG
+中统计它们之间的<strong>路径计数</strong>。</p>
+<blockquote>
+<p>文中提到，<strong>路径计数矩阵（Path Count Matrix）的计算方法可参考
+Sun 和 Han 于 2012
+年的异构信息网络综述</strong>。实际上，这种矩阵也被称为
+<strong>Commuting
+Matrix</strong>，广泛应用于基于元路径的语义关联建模中。</p>
+<p>具体而言，对于一条知识路径：</p>
+<p><span
+class="math display"><em>P</em> = (<em>A</em><sub>1</sub> → <em>A</em><sub>2</sub> → ⋯ → <em>A</em><sub><em>l</em></sub>)</span></p>
+<p>其中 <span
+class="math display"><em>A</em><sub><em>i</em></sub></span> 表示第 <span
+class="math inline"><em>i</em></span> 个节点类型，可以为每对相邻节点类型
+<span
+class="math inline"><em>A</em><sub><em>i</em></sub>, <em>A</em><sub><em>i</em> + 1</sub></span>
+构建一个邻接矩阵 <span
+class="math inline"><em>W</em><sub><em>A</em><sub><em>i</em></sub><em>A</em><sub><em>i</em> + 1</sub></sub></span>。将这些邻接矩阵按路径顺序相乘，得到：</p>
+<p><span
+class="math display"><em>M</em><sub><em>P</em></sub> = <em>W</em><sub><em>A</em><sub>1</sub><em>A</em><sub>2</sub></sub> ⋅ <em>W</em><sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub></sub>⋯<em>W</em><sub><em>A</em><sub><em>l</em> − 1</sub><em>A</em><sub><em>l</em></sub></sub></span></p>
+<p>这个 <span class="math inline"><em>M</em><sub><em>P</em></sub></span>
+就是路径计数矩阵，矩阵中的第 <span
+class="math inline">(<em>i</em>, <em>j</em>)</span> 个元素表示从实体
+<span class="math inline"><em>i</em> ∈ <em>A</em><sub>1</sub></span>
+到实体 <span
+class="math inline"><em>j</em> ∈ <em>A</em><sub><em>l</em></sub></span>
+在路径 <span class="math inline"><em>P</em></span>
+下的<strong>路径实例总数</strong>。也就是说，它反映了两个实体之间<strong>通过某种语义路径的连接强度</strong>。</p>
+</blockquote></li>
+<li><p><strong>计算路径的预测能力</strong>：通过将历史 item 到目标 item
+的路径计数，与历史 item 到其他 item
+的总路径计数作比值，并<strong>在多个滑动窗口中取平均</strong>，得到一条路径的预测能力得分。在论文中，作者使用如下公式来计算某条候选知识路径
+<span class="math inline"><em>p</em><sub><em>i</em></sub></span> 对用户
+<span class="math inline"><em>u</em></span> 的预测能力： <span
+class="math display">$$
+r_{u, p_i} = \text{AVG}_w \left( \frac{ \sum\limits_{i_h \in
+\hat{S_u^w}} C_{p_i}[i_h, i_p] }{ \sum\limits_{i_h \in \hat{S_u^w},\,
+i_o \in S_u^o} C_{p_i}[i_h, i_o] } \right)
+$$</span> 公式中，<span
+class="math inline"><em>r</em><sub><em>u</em>, <em>p</em><sub><em>i</em></sub></sub></span>
+表示用户 <span class="math inline"><em>u</em></span> 对候选知识路径
+<span class="math inline"><em>p</em><sub><em>i</em></sub></span>
+的<strong>预测能力</strong>。作者把每个滑动窗口分成了<span
+class="math inline">$\hat{S_u^w}$</span>和<span
+class="math inline"><em>i</em><sub><em>p</em></sub></span> ，<span
+class="math inline"><em>i</em><sub><em>p</em></sub></span>
+是滑动窗口的最后一个项目，用来作为要预测的下一个项目。 <span
+class="math inline"><em>S</em><sub><em>u</em></sub><sup><em>o</em></sup></span>
+是用户历史中除预测项外的其他项目集合，通过<strong>负采样</strong>得到。矩阵元素
+<span
+class="math inline"><em>C</em><sub><em>p</em><sub><em>i</em></sub></sub>[<em>i</em><sub><em>h</em></sub>, <em>i</em><sub><em>p</em></sub>]</span>
+表示沿路径 <span
+class="math inline"><em>p</em><sub><em>i</em></sub></span> 从历史项目
+<span class="math inline"><em>i</em><sub><em>h</em></sub></span>
+到预测项目 <span
+class="math inline"><em>i</em><sub><em>p</em></sub></span>
+的<strong>路径计数</strong>，<span
+class="math inline">AVG<sub><em>w</em></sub>(⋅)</span>
+表示对所有滑动窗口结果求平均。</p>
+<blockquote>
+<p>直观地理解这个公式，分子衡量了通过这条路径，历史项目和目标项目之间的关联强度，分母衡量了同一滑动窗口内历史项目与负样本的关联强度。我们当然希望分子大，分母小，因为这样说明这条路径能很好地建模用户历史行为与目标行为之间的语义关联，能够有效捕捉用户的真实兴趣变化，而分母小则说明这条路径较少将历史行为指向与用户兴趣无关的项目，有较强的辨认能力，从而更少地引入噪声。</p>
+</blockquote></li>
+</ol>
+<p>​ 最终通过对对于每个用户的预测能力取平均得到各知识路径的全局预测能力：
+<span
+class="math display"><em>r</em><sub><em>p</em><sub><em>i</em></sub></sub> = AVG<sub><em>u</em></sub>(<em>r</em><sub><em>u</em>, <em>p</em><sub><em>i</em></sub></sub>)</span></p>
+<h3 id="知识增强的行为去噪模块">2.2
+<strong>知识增强的行为去噪模块</strong></h3>
+<p>顺序推荐的核心任务是：<strong>根据用户过去的行为，预测其下一步动作</strong>。因此，如何从历史行为序列中建模出<strong>有效的序列模式</strong>，就成为了推荐效果的关键。本文中作者采用了基于自注意力机制的模型作为基础顺序推荐模型，因为它可以有效地捕获常见项目的序列模式，并有助于去除一些噪声行为。然而其局限性在于它容易误判一些<strong>长尾项目</strong>（不常见但用户真正喜欢）为噪声而丢弃，同时也<strong>难以识别热门项目中的噪声行为</strong>。因此作者提出了一个<strong>知识增强的行为去噪模块</strong>。</p>
+<p>在推荐任务中，模型往往会根据用户的历史行为序列生成一个<strong>User
+Embedding</strong>，用于预测下一步行为。然而，这种表示往往会被历史序列中的<strong>噪声行为误导</strong>。为此，作者提出对原始用户表示进行<strong>双重修正</strong>：</p>
+<p><img src="/images/image-20250622001149574.png" /></p>
+<h4 id="隐式修正">2.2.1 隐式修正</h4>
+<p>假设用户 <span class="math inline"><em>u</em></span> 的初始表示向量为
+<span
+class="math inline"><strong>u</strong></span>，交互历史中每个项目的表示组成矩阵
+<span
+class="math inline"><strong>M</strong><sub><em>u</em></sub><sup><em>q</em></sup></span>，作者提出了如下假设：</p>
+<ul>
+<li>如果某个历史项目和用户表示高度相似，那么它很可能是用户真实喜欢的；</li>
+<li>如果相似度低，说明它可能是一次偶然行为，应被削弱其影响。</li>
+</ul>
+<p>于是，作者引入了一个加权机制：</p>
+<ol type="1">
+<li><p>首先用 softmax 归一化用户与每个历史项目的相似度（点积）： <span
+class="math display"><strong>w</strong><sub><em>u</em></sub><sup><em>e</em></sup> = softmax(<strong>u</strong> ⋅ <strong>M</strong><sub><em>u</em></sub><sup><em>q</em><em>T</em></sup>)</span></p></li>
+<li><p>然后以这些权重加权历史项目的表示，得到<strong>修正后的用户表示</strong>：
+<span
+class="math display"><strong>u</strong><sup><em>e</em></sup> = <strong>w</strong><sub><em>u</em></sub><sup><em>e</em></sup> ⋅ <strong>M</strong><sub><em>u</em></sub><sup><em>q</em></sup></span></p></li>
+</ol>
+<p>这个过程自动识别用户更关注哪些历史行为，从而减弱噪声行为的干扰。</p>
+<h4 id="显式修正">2.2.2 显式修正</h4>
+<p>另一方面，知识图谱中的路径信息也提供了一种显式的语义过滤机制。作者的假设是：</p>
+<ul>
+<li>若某个历史项目与用户其他行为之间存在更多的<strong>知识路径连接</strong>（如“同导演”、“同作者”），则它更有可能是用户真实偏好的一部分；反之则可能是噪声。</li>
+</ul>
+<p>为此，作者统计了用户历史项目之间，在选定知识路径集 <span
+class="math inline"><em>P</em></span> 下的<strong>路径计数矩阵</strong>
+<span
+class="math inline"><strong>C</strong><sub><em>u</em></sub><sup><em>s</em></sup></span>，用于衡量项目间的语义关联强度：
+<span
+class="math display"><strong>C</strong><sub><em>u</em></sub><sup><em>s</em></sup> = ∑<sub><em>p</em><sub><em>i</em></sub> ∈ <em>P</em></sub><strong>C</strong><sub><em>p</em><sub><em>i</em></sub></sub>[<strong>q</strong><sub><em>u</em></sub>, <strong>q</strong><sub><em>u</em></sub>]</span>
+基于路径计数矩阵 <span
+class="math inline"><strong>C</strong><sub><em>u</em></sub><sup><em>s</em></sup></span>，作者计算<strong>每个历史项目与其他项目连接路径的平均数</strong>，定义为权重向量
+<span
+class="math inline"><strong>w</strong><sub><em>u</em></sub><sup><em>k</em></sup></span>：
+<span class="math display">$$
+\mathbf{w}_u^k = \frac{\sum(\mathbf{C}_u^s, \text{dim}=0)}{n-1}
+$$</span> 其中，<span class="math inline"><em>n</em></span>
+为历史行为序列长度，且对角线元素置零以避免自连接影响。随后对 <span
+class="math inline"><strong>w</strong><sub><em>u</em></sub><sup><em>k</em></sup></span>
+进行归一化处理： <span class="math display">$$
+\mathbf{w}_u^k =
+\begin{cases}
+\frac{\mathbf{w}_u^k}{\max(\mathbf{w}_u^k)}, &amp; \max(\mathbf{w}_u^k)
+&gt; 0 \\
+\mathbf{w}_u^k, &amp; \text{otherwise}
+\end{cases}
+$$</span> 再<strong>用这些权重对历史项目表示矩阵</strong> <span
+class="math inline"><strong>M</strong><sub><em>u</em></sub><sup><em>q</em></sup></span>
+<strong>加权</strong>，得到基于知识路径的修正表示： <span
+class="math display"><strong>u</strong><sup><em>k</em></sup> = <strong>w</strong><sub><em>u</em></sub><sup><em>k</em></sup> ⋅ <strong>M</strong><sub><em>u</em></sub><sup><em>q</em></sup></span>
+最终，模型融合原始用户表示与两种修正表示，得到去噪后的用户向量： <span
+class="math display"><strong>u</strong><sup><em>d</em></sup> = <strong>u</strong> + <em>λ</em><sub><em>e</em></sub><strong>u</strong><sup><em>e</em></sup> + <em>λ</em><sub><em>k</em></sub><strong>u</strong><sup><em>k</em></sup></span>
+其中，<span class="math inline"><em>λ</em><sub><em>e</em></sub></span>
+与 <span class="math inline"><em>λ</em><sub><em>k</em></sub></span>
+是调节两部分影响力的超参数。</p>
+<h3 id="知识增强的偏好学习模块">2.3 知识增强的偏好学习模块</h3>
+<p>去噪后的用户表示虽然提升了推荐的准确性，但仍忽视了用户偏好的多样性和细粒度特征。由于用户行为数据稀疏，单纯依赖历史行为序列难以全面捕捉用户的复杂兴趣。为此，作者引入了<strong>知识路径</strong>，利用其中丰富的语义信息，挖掘不同用户对项目多方面的偏好，同时为推荐结果提供<strong>可解释性</strong>。</p>
+<p>首先，作者提出了一个核心<strong>假设</strong>：</p>
+<ul>
+<li>不同用户对项目的不同方面有不同偏好，这些偏好可以通过不同的知识路径反映出来。举例来说，有些用户偏好同一导演的电影，有些则更关注电影的类别。且用户<strong>更可能对与历史行为有知识连接的候选项目产生兴趣</strong>。</li>
+</ul>
+<p>基于此，作者设计了一个<strong>多注意力机制的知识增强偏好学习模块</strong>，用于结合用户历史行为的序列模式和知识路径之间的语义关联，捕获用户多维度的兴趣偏好。</p>
+<p>具体地，对于用户 <span class="math inline"><em>u</em></span>
+和候选项目 <span class="math inline"><em>v</em></span>，定义路径得分
+<span
+class="math inline"><em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>p</em><em>a</em><em>t</em><em>h</em></sup></span>
+来量化用户对候选项目基于知识路径的偏好： <span class="math display">$$
+s^{path}_{u,v} = \sum_{j=1}^n \sum_{k=1}^{|P|} \alpha_{u,j} \cdot
+\beta_{u,k} \cdot C_{p_k}[q_{u,j}, v]
+$$</span></p>
+<ul>
+<li><p><span
+class="math inline"><em>n</em></span>：历史序列长度</p></li>
+<li><p><span
+class="math inline">|<em>P</em>|</span>：选定知识路径数量</p></li>
+<li><p><span
+class="math inline"><em>q</em><sub><em>u</em>, <em>j</em></sub></span>：用户
+<span class="math inline"><em>u</em></span> 历史序列中的第 <span
+class="math inline"><em>j</em></span> 个项目</p></li>
+<li><p><span class="math inline"><em>v</em></span>：候选项目</p></li>
+<li><p><span
+class="math inline"><em>α</em><sub><em>u</em>, <em>j</em></sub></span>：第
+<span class="math inline"><em>j</em></span>
+个历史交互的注意力权重</p></li>
+<li><p><span
+class="math inline"><em>β</em><sub><em>u</em>, <em>k</em></sub></span>：第
+<span class="math inline"><em>k</em></span>
+条知识路径的注意力权重</p></li>
+<li><p><span
+class="math inline"><em>C</em><sub><em>p</em><sub><em>k</em></sub></sub>[<em>q</em><sub><em>u</em>, <em>j</em></sub>, <em>v</em>]</span>：知识路径
+<span class="math inline"><em>p</em><sub><em>k</em></sub></span>
+在历史项目与候选项目之间的路径计数，反映语义关联强度</p></li>
+</ul>
+<p>这里的两个注意力权重 <span
+class="math inline"><em>α</em><sub><em>u</em></sub></span> 和 <span
+class="math inline"><em>β</em><sub><em>u</em></sub></span>
+通过对去噪后的用户表示 <span
+class="math inline"><strong>u</strong><sup><em>d</em></sup></span>
+与历史项目及知识路径的嵌入矩阵分别进行 softmax 计算得到： <span
+class="math display"><em>α</em><sub><em>u</em></sub> = softmax(<strong>u</strong><sup><em>d</em></sup><strong>W</strong><sub><em>h</em><em>i</em><em>s</em><em>t</em></sub><strong>E</strong><sub><em>u</em></sub><sup><em>T</em></sup>)</span></p>
+<p><span
+class="math display"><em>β</em><sub><em>u</em></sub> = softmax(<strong>u</strong><sup><em>d</em></sup><strong>W</strong><sub><em>p</em><em>a</em><em>t</em><em>h</em></sub><strong>P</strong><sup><em>T</em></sup>)</span></p>
+<p>其中，<span
+class="math inline"><strong>W</strong><sub><em>h</em><em>i</em><em>s</em><em>t</em></sub></span>
+和 <span
+class="math inline"><strong>W</strong><sub><em>p</em><em>a</em><em>t</em><em>h</em></sub></span>
+是可训练的权重矩阵，<span
+class="math inline"><strong>E</strong><sub><em>u</em></sub></span>
+是历史项目加位置编码的嵌入矩阵，<span
+class="math inline"><strong>P</strong></span> 是知识路径的嵌入矩阵。</p>
+<p>这里，<span
+class="math inline"><em>α</em><sub><em>u</em></sub></span> 和 <span
+class="math inline"><em>β</em><sub><em>u</em></sub></span>
+分别对历史交互和知识路径的关注程度进行加权，二者共同建模用户的多方面偏好，而路径计数则量化了知识相关性。</p>
+<p>对得分 <span
+class="math inline"><em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>p</em><em>a</em><em>t</em><em>h</em></sup></span>
+进行归一化处理： <span class="math display">$$
+s^{path}_{u,v} =
+\begin{cases}
+s^{path}_{u,v}, &amp; \eta_u = 0 \\
+\frac{s^{path}_{u,v}}{\eta_u}, &amp; \eta_u &gt; 0
+\end{cases}
+$$</span> 其中归一化因子 <span class="math display">$$
+\eta_u = \max_v \left(\frac{\sum_{j,k} C_{p_k}[q_{u,j}, v]}{n \cdot
+|P|}\right)
+$$</span> 保证得分在合理范围内，方便不同用户间的比较。</p>
+<p>除了基于知识路径的偏好评分 <span
+class="math inline"><em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>p</em><em>a</em><em>t</em><em>h</em></sup></span>，模型还计算了基于去噪用户表示
+<span class="math inline"><strong>u</strong><sup><em>d</em></sup></span>
+与候选项目嵌入 <span
+class="math inline"><strong>M</strong><sub><em>v</em></sub></span>
+的相似度得分： <span
+class="math display"><em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>s</em><em>i</em><em>m</em></sup> = <strong>u</strong><sup><em>d</em></sup> ⋅ <strong>M</strong><sub><em>v</em></sub><sup><em>T</em></sup></span>
+这体现了用户当前兴趣与候选项目的整体匹配度，是顺序推荐中的经典评分方式。</p>
+<p>最终，模型融合了这两类评分，利用权衡参数 <span
+class="math inline"><em>λ</em></span>
+控制两者的重要性比例，计算出综合的推荐分数： <span
+class="math display"><em>s</em><sub><em>u</em>, <em>v</em></sub> = <em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>s</em><em>i</em><em>m</em></sup> + <em>λ</em> ⋅ <em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>p</em><em>a</em><em>t</em><em>h</em></sup></span>
+基于该最终分数 <span
+class="math inline"><em>s</em><sub><em>u</em>, <em>v</em></sub></span>，系统为用户生成个性化的推荐列表。</p>
 
       
 
