@@ -185,6 +185,7 @@ Recommendation | IEEE Journals &amp; Magazine | IEEE Xplore</a></p>
 <li>忽略用户行为序列中的<strong>噪声</strong>的负面影响。</li>
 <li>用户行为的<strong>稀疏性</strong>导致了很难从用户的历史行为中较好地学习用户的偏好。</li>
 </ul>
+<p><img src="/images/image-20250625203158501.png" /></p>
 <p>近年来，有少量研究尝试了<strong>知识图谱</strong>在顺序推荐中的应用，但这些研究大都假设知识图谱中的<strong>知识路径</strong>都是对推荐有用的，而这可能会引入KG中的无关信息带来的噪声。</p>
 <p>为了解决这些问题，本文提出了<strong>基于知识图谱的行为去噪和偏好学习模型KGDPL</strong>。其假设：知识图谱中的知识路径不仅可以帮助<strong>辨别用户行为序列中的噪声行为</strong>，还能为<strong>用户的后续行为预测提供辅助信息</strong>，进而提升推荐系统的准确性与可解释性。</p>
 <p>KGDPL主要包含三个关键模块：</p>
@@ -416,6 +417,62 @@ class="math inline"><em>λ</em></span>
 class="math display"><em>s</em><sub><em>u</em>, <em>v</em></sub> = <em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>s</em><em>i</em><em>m</em></sup> + <em>λ</em> ⋅ <em>s</em><sub><em>u</em>, <em>v</em></sub><sup><em>p</em><em>a</em><em>t</em><em>h</em></sup></span>
 基于该最终分数 <span
 class="math inline"><em>s</em><sub><em>u</em>, <em>v</em></sub></span>，系统为用户生成个性化的推荐列表。</p>
+<h2 id="实验">3 实验</h2>
+<h3 id="实验设置">3.1 实验设置</h3>
+<h4 id="数据集选择">数据集选择</h4>
+<p>论文中使用了四个广泛应用的数据集，涵盖了不同领域的推荐任务。具体如下：
+-
+<strong>Amazon-Book</strong>：包含用户对图书的评分数据，适用于电商场景。
+-
+<strong>Last-FM</strong>：包含用户的音乐偏好数据，适用于社交平台和音乐推荐。
+- <strong>Yelp</strong>：包含用户对餐厅的评价数据，适用于本地服务推荐。
+-
+<strong>MovieLens-1M</strong>：包含用户对电影的评分数据，经典的电影推荐数据集。</p>
+<p><img src="/images/image-20250625203743334.png" /></p>
+<p>所有数据集均经过 <strong>10-core</strong>
+过滤，确保每个用户和每个物品至少有10次交互，旨在提升数据的可靠性并减少数据稀疏性对模型的影响。</p>
+<h4 id="基线方法对比">基线方法对比</h4>
+<p>为了全面验证 KGDPL
+模型的有效性，论文选择了多个具有代表性的基线方法进行对比，涵盖了： -
+<strong>非序列模型</strong>：如 BPR、CKE，这些模型没有使用时间序列信息。
+- <strong>序列模型</strong>：如 GRU4Rec、SASRec，考虑了用户的行为序列。
+- <strong>KG增强模型</strong>：如
+KGAT、KERL，使用了知识图谱来增强推荐效果。 -
+<strong>噪声处理模型</strong>：如
+HRL+NAIS，专门处理历史行为序列中的噪声。</p>
+<h4 id="评估指标">评估指标</h4>
+<p>作者采用了 <strong>HR@10</strong>（Hit Ratio at 10）和
+<strong>NDCG@10</strong>（Normalized Discounted Cumulative Gain at
+10）作为主要评估指标，兼顾了推荐准确性和排序质量，符合推荐系统的常用标准。</p>
+<h3 id="实验结果">3.2 实验结果</h3>
+<p><img src="/images/image-20250625203828775.png" /></p>
+<h4 id="模型性能">模型性能</h4>
+<p>实验结果显示，KGDPL 在所有数据集上都显著优于基线方法。以
+<strong>Amazon-Book</strong> 和 <strong>Last-FM</strong>
+数据集为例，KGDPL 在 <strong>NDCG@10</strong> 上分别提升了 15.0% 和
+11.6%。这些结果表明，KGDPL
+在利用知识图谱路径进行噪声过滤和增强用户偏好建模方面表现出了强大的能力。</p>
+<h4 id="消融实验">消融实验</h4>
+<p><img src="/images/image-20250625203906828.png" /></p>
+<p>论文还进行了消融实验，通过分别移除模型中的关键模块来验证每个模块的重要性。具体而言，实验通过以下几种方式进行：
+- <strong>KGDPL-PS</strong>：去除了路径选择模块。 -
+<strong>KGDPL-BD</strong>：去除了行为去噪模块。 -
+<strong>KGDPL-MA</strong>：去除了多注意力模块。</p>
+<p>结果表明，去掉路径选择模块时，模型性能下降最为明显，强调了有效路径选择对于噪声减少和推荐性能的重要性。</p>
+<h4 id="参数分析">参数分析</h4>
+<p>作者还对模型的参数进行了一系列分析，包括路径数量
+<strong>N</strong>、滑动窗口大小 <strong>δ</strong>、以及融合参数
+<strong>λ</strong> 等。分析发现，路径数量 <strong>N</strong> 在 4 到 6
+之间时性能最佳，验证了模型对这些超参数的敏感性和鲁棒性。</p>
+<p><img src="/images/image-20250625203940211.png" /></p>
+<h4 id="用户推荐结果的可解释性分析">用户推荐结果的可解释性分析</h4>
+<p>通过具体的用户推荐案例，论文展示了KGDPL模型如何利用知识图谱路径以及注意力权重提供<strong>推荐结果的可解释性</strong>。以
+<strong>Amazon-Book</strong>
+数据集为例，某用户曾与一部图书互动，该图书通过知识图谱路径“同作者”与另一部图书相连接。KGDPL模型不仅提供了推荐该图书的合理性，还基于“同系列书籍”的路径为用户提供了解释。通过这种方式，用户能够理解为什么该图书被推荐，从而提高了推荐结果的透明度和信任度。</p>
+<h3 id="结果分析">3.3 结果分析</h3>
+<p>KGDPL
+在所有数据集上的表现优于其他基线方法，尤其在涉及噪声处理的任务中，知识图谱路径的筛选和噪声处理模块显著提升了推荐精度。路径选择模块通过选择具有更高预测能力的路径，从而提高了推荐结果的有效性，避免了无关信息的干扰。</p>
+<p>通过消融实验，论文展示了模型的各个组成部分对最终性能的贡献。特别是路径选择模块的移除导致了最显著的性能下降，进一步证明了KG路径对推荐效果的关键作用。此实验结果也体现了KGDPL模型设计中的系统性和模块化思维。</p>
 
       
 
